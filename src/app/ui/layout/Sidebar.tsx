@@ -1,7 +1,7 @@
 import { House } from "lucide-react";
 import SidebarLink from "./SidebarLink";
 
-const SidebarNav = () => {
+const Sidebar = () => {
   return (
     <aside className="w-64 h-full bg-blue-950 text-white p-4">
       <nav>
@@ -15,4 +15,4 @@ const SidebarNav = () => {
   );
 };
 
-export default SidebarNav;
+export default Sidebar;
