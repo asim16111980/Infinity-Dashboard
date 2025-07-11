@@ -1,4 +1,4 @@
-import { ButtonProps } from "./Button.type";
+import { ButtonProps } from "./button.type";
 
 const IconButton = ({ title, icon, className, onClick }: ButtonProps) => {
   return (

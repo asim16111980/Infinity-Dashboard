@@ -1,4 +1,4 @@
-import { ButtonProps } from "./Button.type";
+import { ButtonProps } from "./button.type";
 
 const RegularButton = ({ title, className, onClick }: ButtonProps) => {
   return (
