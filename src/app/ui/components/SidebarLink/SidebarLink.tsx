@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SidebarLinkProps } from "./sidebarLink.type";
-import Icon from "../Icon/Icon";
+import LucideIcon from "../LucideIcon/LucideIcon";
 import clsx from "clsx";
 
 const SidebarLink = ({
@@ -18,7 +18,7 @@ const SidebarLink = ({
         "bg-transparent text-white": !isActive,
       })}
     >
-      <Icon lucideIcon={lucideIcon} className="size-6" />
+      <LucideIcon lucideIcon={lucideIcon} className="size-6" />
       <span className="text-sm capitalize">{label}</span>
       <span
         className={clsx(

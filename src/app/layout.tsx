@@ -28,10 +28,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen grid grid-rows-[64px,1fr]">
         <Header userAvatar="" />
-        <section className="size-full flex">
+        <main className="size-full flex">
           <SidebarNav />
           {children}
-        </section>
+        </main>
       </body>
     </html>
   );
