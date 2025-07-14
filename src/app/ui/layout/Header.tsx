@@ -5,12 +5,12 @@ import SearchBox from "../components/SearchBox/SearchBox";
 
 const Header = ({ userAvatar }: { userAvatar: string }) => {
   return (
-    <header className="w-full h-16 flex items-center justify-between p-4 bg-gray-950 text-white filter drop-shadow">
+    <header className="w-full h-16 flex items-center justify-between gap-36 p-4 bg-gray-950 text-white filter drop-shadow">
       <div className="flex items-center gap-2">
         {/* <Image src="/logo.png" alt="Logo" width={50} height={50} /> */}
         <h1>Infinity</h1>
       </div>
-      <SearchBox inputClassName="text-sm text-white placeholder:text-white"/>
+      <SearchBox className="h-6 flex-1" iconClassName="text-gray-50" inputClassName="text-sm text-white placeholder:text-white"/>
       <div className="flex items-center gap-6">
         <Link href="#" className="size-7 relative">
           <Bell className="size-6" />
