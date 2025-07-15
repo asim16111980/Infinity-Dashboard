@@ -1,4 +1,5 @@
 import IconButton from "@/app/ui/components/Button/IconButton";
+import CheckBox from "@/app/ui/components/CheckBox/CheckBox";
 import Dropdown from "@/app/ui/components/Dropdown/Dropdown";
 import PageHeader from "@/app/ui/components/PageHeader/PageHeader";
 import SearchBox from "@/app/ui/components/SearchBox/SearchBox";
@@ -34,17 +35,15 @@ const Page = () => {
         </div>
         <div className="w-full flex-1 overflow-x-auto">
           <table className="min-w-full">
-            <thead >
+            <thead>
               <tr className="text-sm text-slate-500">
                 <th>
-                  <input
-                    type="checkbox"
-                    name="selectAll"
-                    id="selectAll"
-                    className="appearance-none size-5 rounded bg-white border border-slate-200 cursor-pointer"
+                  <CheckBox
+                    label="product"
+                    className="gap-2 text-sm text-slate-500 capitalize font-normal"
+                    checkBoxClassName="size-5 rounded border border-slate-300"
                   />
                 </th>
-                <th className="capitalize font-normal">product</th>
                 <th className="capitalize font-normal">inventory</th>
                 <th className="capitalize font-normal">color</th>
                 <th className="capitalize font-normal">price</th>
