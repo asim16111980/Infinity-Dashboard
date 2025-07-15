@@ -37,21 +37,23 @@ const Dropdown = ({ title, items, className }: DropdownProps) => {
     <div
       ref={dropdownRef}
       className={clsx(
-        "w-44 h-10 relative border border-slate-200 rounded",
+        "w-44 h-10 relative bg-white border border-slate-200 rounded",
         className
       )}
     >
       <button
         type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className="size-full flex items-center justify-between px-4"
         onClick={() => setIsOpen((val) => !val)}
       >
-        <span className="capitalize">
+        <span className="capitalize text-base text-slate-400">
           {selectedItemIndex === null ? title : items[selectedItemIndex]}
         </span>
         {
           <ChevronDown
-            className={clsx("transition-transform duration-300", {
+            className={clsx("transition-transform duration-300 text-slate-500", {
               "rotate-180": isOpen,
               "rotate-0": !isOpen,
             })}

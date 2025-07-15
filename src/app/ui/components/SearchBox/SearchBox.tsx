@@ -1,8 +1,8 @@
 import { Search } from "lucide-react";
-import { SearchBox } from "./serachBox.type";
+import { SearchBoxProps } from "./serachBox.type";
 import clsx from "clsx";
 
-const SearchBox = ({ className,iconClassName, inputClassName }: SearchBox) => {
+const SearchBox = ({ className, iconClassName, inputClassName }: SearchBoxProps) => {
   return (
     <div className={clsx("relative", className)}>
       <Search className={clsx("size-6 absolute left-2 top-1/2 transform -translate-y-1/2", iconClassName)} />

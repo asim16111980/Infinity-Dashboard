@@ -1,4 +1,4 @@
-export interface SearchBox {
+export interface SearchBoxProps {
   className?: string;
   iconClassName?: string;
   inputClassName?: string;

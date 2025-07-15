@@ -3,7 +3,7 @@ import Dropdown from "@/app/ui/components/Dropdown/Dropdown";
 import PageHeader from "@/app/ui/components/PageHeader/PageHeader";
 import SearchBox from "@/app/ui/components/SearchBox/SearchBox";
 import { FILTER_ITEMS } from "@/constants/filterItems";
-import { Pencil, Plus,  Trash } from "lucide-react";
+import { Pencil, Plus, Trash } from "lucide-react";
 
 const Page = () => {
   return (
@@ -20,16 +20,57 @@ const Page = () => {
       <div className="w-full flex-1 flex flex-col gap-7 p-7 bg-white rounded-md shadow">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Dropdown title="filter" items={ FILTER_ITEMS} />
-            {/* <select name="filter" id="" className="w-44 h-10 border border-slate-200 rounded"></select> */}
-           <SearchBox className="w-80 h-10 rounded border border-slate-200" iconClassName="text-slate-500" inputClassName="text-base text-slate-400 placeholder:text-slate-400"/>
+            <Dropdown title="filter" items={FILTER_ITEMS} />
+            <SearchBox
+              className="w-80 h-10 rounded bg-white border border-slate-200"
+              iconClassName="text-slate-500"
+              inputClassName="text-base text-slate-400 placeholder:text-slate-400"
+            />
           </div>
           <div className="flex items-center gap-4">
             <IconButton lucideIcon={Pencil} />
             <IconButton lucideIcon={Trash} />
           </div>
         </div>
-        <div></div>
+        <div className="w-full flex-1 overflow-x-auto">
+          <table className="min-w-full">
+            <thead >
+              <tr className="text-sm text-slate-500">
+                <th>
+                  <input
+                    type="checkbox"
+                    name="selectAll"
+                    id="selectAll"
+                    className="appearance-none size-5 rounded bg-white border border-slate-200 cursor-pointer"
+                  />
+                </th>
+                <th className="capitalize font-normal">product</th>
+                <th className="capitalize font-normal">inventory</th>
+                <th className="capitalize font-normal">color</th>
+                <th className="capitalize font-normal">price</th>
+                <th className="capitalize font-normal">rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {products.map((product) => (
+      <tr key={product.id} className="hover:bg-slate-50">
+        <td><img src={product.image} className="w-10 h-10 rounded" /></td>
+        <td className="font-medium">{product.name}</td>
+        <td>${product.price}</td>
+        <td>
+          <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">
+            Active
+          </span>
+        </td>
+        <td>
+          <button>✏️</button>
+          <button>🗑️</button>
+        </td>
+      </tr>
+    ))} */}
+            </tbody>
+          </table>
+        </div>
         <div></div>
       </div>
     </section>
