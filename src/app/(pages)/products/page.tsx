@@ -4,7 +4,8 @@ import Dropdown from "@/app/ui/components/Dropdown/Dropdown";
 import PageHeader from "@/app/ui/components/PageHeader/PageHeader";
 import SearchBox from "@/app/ui/components/SearchBox/SearchBox";
 import { FILTER_ITEMS } from "@/constants/filterItems";
-import { Pencil, Plus, Trash } from "lucide-react";
+import { ArrowLeft, ArrowRight, Pencil, Plus, Trash } from "lucide-react";
+import Link from "next/link";
 
 const Page = () => {
   return (
@@ -29,19 +30,20 @@ const Page = () => {
             />
           </div>
           <div className="flex items-center gap-4">
-            <IconButton lucideIcon={Pencil} />
-            <IconButton lucideIcon={Trash} />
+            <IconButton lucideIcon={Pencil} className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"/>
+            <IconButton lucideIcon={Trash} className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"/>
           </div>
         </div>
         <div className="w-full flex-1 overflow-x-auto">
           <table className="min-w-full">
-            <thead>
+            <thead className="w-full h-11 border-b-2 border-slate-200">
               <tr className="text-sm text-slate-500">
                 <th>
                   <CheckBox
                     label="product"
                     className="gap-2 text-sm text-slate-500 capitalize font-normal"
-                    checkBoxClassName="size-5 rounded border border-slate-300"
+                    checkBoxClassName="size-5"
+                    inputClassName="rounded border border-slate-300"
                   />
                 </th>
                 <th className="capitalize font-normal">inventory</th>
@@ -70,7 +72,17 @@ const Page = () => {
             </tbody>
           </table>
         </div>
-        <div></div>
+        <div className="w-full h-9 flex items-center justify-between">
+          <div className="w-96 flex items-center justify-between">
+        <IconButton lucideIcon={ArrowLeft} className="text-slate-400"/>
+          <ul className="flex-1 flex items-center text-base text-slate-600 mx-2">
+            <li><Link href="#">1</Link></li>
+            <li><Link href="#">...</Link></li>
+            </ul>
+        <IconButton lucideIcon={ArrowRight} className="text-slate-400"/>
+          </div>
+          <span className="text-base text-slate-600">Results</span>
+        </div>
       </div>
     </section>
   );
