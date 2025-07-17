@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import { LinkButtonProps } from "./button.type";
-import LucideIcon from "../LucideIcon/LucideIcon";
+
 import Link from "next/link";
 
 const LinkButton = ({
   title,
   lucideIcon,
+  iconClassName,
   href,
   className,
 }: LinkButtonProps) => {
@@ -13,12 +14,12 @@ const LinkButton = ({
     <Link
       type="button"
       className={clsx(
-        "w-40 h-10 flex items-center justify-center gap-2 text-white text-base bg-blue-700 capitalize rounded",
+        "flex items-center justify-center capitalize ",
         className
       )}
       href={href}
     >
-      {lucideIcon && <LucideIcon lucideIcon={lucideIcon} className="size-6" />}
+      {lucideIcon && <LucideIcon lucideIcon={lucideIcon} className={iconClassName} />}
       <span>{title}</span>
     </Link>
   );

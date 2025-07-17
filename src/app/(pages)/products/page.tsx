@@ -12,12 +12,22 @@ const Page = () => {
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader
         title="product"
-        regularButton={{ title: "export" }}
-        linkButton={{
-          title: "add product",
-          lucideIcon: Plus,
-          href: "/products/add",
-        }}
+        regularButtons={[
+          {
+            variant: "secondary",
+            title: "export",
+            className: "w-24 h-10 bg-white text-base text-blue-700 rounded",
+          },
+          {
+            asChild: true,
+            title: "add product",
+            lucideIcon: Plus,
+            iconClassName: "size-6",
+            href: "/products/add",
+            className:
+              "w-40 h-10 gap-2 text-white text-base bg-blue-700 rounded",
+          },
+        ]}
       />
       <div className="w-full flex-1 flex flex-col gap-7 p-7 bg-white rounded-md shadow">
         <div className="w-full flex items-center justify-between">
@@ -30,8 +40,14 @@ const Page = () => {
             />
           </div>
           <div className="flex items-center gap-4">
-            <IconButton lucideIcon={Pencil} className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"/>
-            <IconButton lucideIcon={Trash} className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"/>
+            <IconButton
+              lucideIcon={Pencil}
+              className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"
+            />
+            <IconButton
+              lucideIcon={Trash}
+              className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"
+            />
           </div>
         </div>
         <div className="w-full flex-1 overflow-x-auto">
@@ -74,12 +90,16 @@ const Page = () => {
         </div>
         <div className="w-full h-9 flex items-center justify-between">
           <div className="w-96 flex items-center justify-between">
-        <IconButton lucideIcon={ArrowLeft} className="text-slate-400"/>
-          <ul className="flex-1 flex items-center text-base text-slate-600 mx-2">
-            <li><Link href="#">1</Link></li>
-            <li><Link href="#">...</Link></li>
+            <IconButton lucideIcon={ArrowLeft} className="text-slate-400" />
+            <ul className="flex-1 flex items-center text-base text-slate-600 mx-2">
+              <li>
+                <Link href="#">1</Link>
+              </li>
+              <li>
+                <Link href="#">...</Link>
+              </li>
             </ul>
-        <IconButton lucideIcon={ArrowRight} className="text-slate-400"/>
+            <IconButton lucideIcon={ArrowRight} className="text-slate-400" />
           </div>
           <span className="text-base text-slate-600">Results</span>
         </div>

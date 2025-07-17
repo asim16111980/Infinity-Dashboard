@@ -1,18 +1,27 @@
 import clsx from "clsx";
 import { ButtonProps } from "./button.type";
-
-const RegularButton = ({ title, className, onClick }: ButtonProps) => {
+import LucideIcon from "../LucideIcon/LucideIcon";
+const RegularButton = ({...props}: ButtonProps) => {
+  const {
+    asChild = false,
+    href,
+    variant = "primary",
+    title,
+    lucideIcon,
+    iconClassName,
+    className,
+    onClick,
+  } = props ;
+  const Comp = asChild ? "span" : "button";
   return (
-    <button
-      type="button"
-      className={clsx(
-        "w-24 h-10 flex items-center justify-center bg-white text-base text-blue-700 capitalize rounded",
-        className 
-      )}
-      onClick={onClick}
+    <Comp
+    type={asChild ? undefined : variant === "primary" ? "submit" : "button"}
+      className={clsx("flex items-center justify-center capitalize", className)}
+      onClick={!asChild ? onClick : undefined}
     >
-      {title}
-    </button>
+      {lucideIcon && <LucideIcon lucideIcon={lucideIcon} className={iconClassName} />}
+      <span>{title}</span>
+    </Comp>
   );
 };
 
