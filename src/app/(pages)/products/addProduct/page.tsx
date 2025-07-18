@@ -1,4 +1,4 @@
-import PageHeader from "@/app/ui/components/PageHeader/PageHeader";
+import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import { Plus } from "lucide-react";
 
 const Page = () => {

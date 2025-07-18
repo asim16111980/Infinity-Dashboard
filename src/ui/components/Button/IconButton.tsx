@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import LucideIcon from "../LucideIcon/LucideIcon";
 import { ButtonProps } from "./button.type";

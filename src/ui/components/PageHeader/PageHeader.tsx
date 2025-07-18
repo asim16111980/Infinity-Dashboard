@@ -14,7 +14,7 @@ const PageHeader = ({
         {backButton && (
           <Link href="#">
             <RegularButton
-              asChild
+              asLink
               title="back"
               lucideIcon={ArrowLeft}
               iconClassName="size-3.5 text-slate-500"
@@ -26,15 +26,9 @@ const PageHeader = ({
       </div>
       <div className="flex items-center gap-3">
         {regularButtons &&
-          regularButtons.map((button, index) =>
-            button.asChild ? (
-              <Link href={button.href ?? "#"}>
-                <RegularButton key={index} {...button} />
-              </Link>
-            ) : (
-              <RegularButton key={index} {...button} />
-            )
-          )}
+          regularButtons.map((button, index) => (
+            <RegularButton key={index} {...button} />
+          ))}
       </div>
     </div>
   );

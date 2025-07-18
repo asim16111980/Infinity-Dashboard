@@ -1,8 +1,8 @@
-import IconButton from "@/app/ui/components/Button/IconButton";
-import CheckBox from "@/app/ui/components/CheckBox/CheckBox";
-import Dropdown from "@/app/ui/components/Dropdown/Dropdown";
-import PageHeader from "@/app/ui/components/PageHeader/PageHeader";
-import SearchBox from "@/app/ui/components/SearchBox/SearchBox";
+import IconButton from "@/ui/components/Button/IconButton";
+import CheckBox from "@/ui/components/CheckBox/CheckBox";
+import Dropdown from "@/ui/components/Dropdown/Dropdown";
+import PageHeader from "@/ui/components/PageHeader/PageHeader";
+import SearchBox from "@/ui/components/SearchBox/SearchBox";
 import { FILTER_ITEMS } from "@/constants/filterItems";
 import { ArrowLeft, ArrowRight, Pencil, Plus, Trash } from "lucide-react";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const Page = () => {
             className: "w-24 h-10 bg-white text-base text-blue-700 rounded",
           },
           {
-            asChild: true,
+            asLink: true,
             title: "add product",
             lucideIcon: Plus,
             iconClassName: "size-6",
