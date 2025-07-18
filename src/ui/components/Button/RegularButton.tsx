@@ -2,15 +2,16 @@
 
 import React from "react";
 import clsx from "clsx";
-import LucideIcon from "../LucideIcon/LucideIcon";
+import Icon from "../Icon/Icon";
 import { ButtonProps } from "./button.type";
+import Link from "next/link";
 
 const RegularButton = ({
   asLink = false,
   href,
   variant = "primary",
   title,
-  lucideIcon,
+  iconName,
   iconClassName,
   className,
   onClick,
@@ -18,32 +19,22 @@ const RegularButton = ({
   ...props
 }: React.PropsWithChildren<ButtonProps>) => {
   const classes = clsx(
-    "flex items-center justify-center gap-2 capitalize rounded px-4 py-2 transition focus:outline-none",
+    "flex items-center justify-center",
     className
   );
-console.log(lucideIcon, "lucideIcon");
 
-  if (asLink && React.isValidElement(children)) {
-    return React.cloneElement(
-      children as React.ReactElement<any>,
-      {
-        className: clsx(
-          (children as React.ReactElement<any>).props.className,
-          classes
-        ),
-        "aria-label": title ?? undefined,
-        ...props,
-      },
-      <>
-        {lucideIcon && (
-          <LucideIcon
-            lucideIcon={lucideIcon}
-            className={clsx("size-5", iconClassName)}
-            aria-hidden="true"
-          />
+  if (asLink) {
+    return (
+      <Link
+        href={href ?? "#"}
+        className={classes}
+        aria-label={title ?? undefined}
+      >
+        {iconName && (
+          <Icon name={iconName} className={iconClassName} aria-hidden="true" />
         )}
-        {(children as React.ReactElement<any>).props.children ?? title}
-      </>
+        <span className="capitalize">{title}</span>
+      </Link>
     );
   }
 
@@ -56,9 +47,9 @@ console.log(lucideIcon, "lucideIcon");
       aria-label={title ?? undefined}
       {...props}
     >
-      {lucideIcon && (
-        <LucideIcon
-          lucideIcon={lucideIcon}
+      {iconName && (
+        <Icon
+          name={iconName}
           className={clsx("size-5", iconClassName)}
           aria-hidden="true"
         />

@@ -11,12 +11,12 @@ const Sidebar = () => {
       <nav>
         <ul className="flex flex-col">
           {SIDEBAR_LINKS.map((link) => (
-            <li key={link.href}>
+            <li key={link.href} className="w-full h-11">
               <SidebarLink
                 isActive={path === link.href}
                 href={link.href}
                 label={link.label}
-                lucideIcon={link.icon}
+                iconName={link.icon}
                 badgeCount={link.badgeCount}
               />
             </li>

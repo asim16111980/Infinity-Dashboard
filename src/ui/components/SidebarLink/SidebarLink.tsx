@@ -1,25 +1,28 @@
 import Link from "next/link";
 import { SidebarLinkProps } from "./sidebarLink.type";
-import LucideIcon from "../LucideIcon/LucideIcon";
 import clsx from "clsx";
+import Icon from "../Icon/Icon";
 
 const SidebarLink = ({
   isActive,
   href,
-  lucideIcon,
+  iconName,
   label,
   badgeCount,
 }: SidebarLinkProps) => {
   return (
     <Link
       href={href}
-      className={clsx("w-full h-11 flex items-center gap-4 px-4 rounded", {
-        "bg-white text-gray-500": isActive,
-        "bg-transparent text-white": !isActive,
-      })}
+      className={clsx(
+        "size-full flex items-center gap-4 px-4 rounded select-none",
+        {
+          "bg-white text-gray-500": isActive,
+          "bg-transparent text-white": !isActive,
+        }
+      )}
     >
-      <LucideIcon lucideIcon={lucideIcon} className="size-6" />
-      <span className="text-sm capitalize">{label}</span>
+      <Icon name={iconName} className="size-6" />
+      <span className="flex-1 text-sm capitalize">{label}</span>
       <span
         className={clsx(
           "w-6 h-4 flex items-center justify-center ml-auto text-xs font-bold rounded-xl",

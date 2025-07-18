@@ -30,7 +30,7 @@ export default function RootLayout({
         <Header userAvatar="" />
         <main className="size-full flex">
           <SidebarNav />
-          {children}
+          <div className="flex-1">{children}</div>
         </main>
       </body>
     </html>

@@ -1,13 +1,13 @@
-import { Home, Tag, LucideIcon } from "lucide-react";
+import { IconName } from "@/ui/components/Icon/icons";
 
 interface SidebarLink {
   href: string;
   label: string;
-  icon: LucideIcon;
+  icon:IconName;
   badgeCount?: number;
 }
 
 export const SIDEBAR_LINKS: SidebarLink[] = [
-  { href: "/", label: "dashboard", icon: Home },
-  { href: "/products", label: "products", icon: Tag, badgeCount: 16 },
+  { href: "/", label: "dashboard", icon: "home" },
+  { href: "/products", label: "products", icon: "tag", badgeCount: 16 },
 ];

@@ -1,10 +1,10 @@
 "use client";
 
 import clsx from "clsx";
-import LucideIcon from "../LucideIcon/LucideIcon";
 import { ButtonProps } from "./button.type";
+import Icon from "../Icon/Icon";
 
-const IconButton = ({ lucideIcon, className, onClick }: ButtonProps) => {
+const IconButton = ({ iconName, className, onClick }: ButtonProps) => {
   return (
     <button
       type="button"
@@ -15,7 +15,7 @@ const IconButton = ({ lucideIcon, className, onClick }: ButtonProps) => {
       )}
       onClick={onClick}
     >
-      {lucideIcon && <LucideIcon lucideIcon={lucideIcon} />}
+      {iconName && <Icon name={iconName} />}
     </button>
   );
 };

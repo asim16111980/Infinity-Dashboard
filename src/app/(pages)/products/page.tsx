@@ -4,7 +4,6 @@ import Dropdown from "@/ui/components/Dropdown/Dropdown";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import SearchBox from "@/ui/components/SearchBox/SearchBox";
 import { FILTER_ITEMS } from "@/constants/filterItems";
-import { ArrowLeft, ArrowRight, Pencil, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 
 const Page = () => {
@@ -21,7 +20,7 @@ const Page = () => {
           {
             asLink: true,
             title: "add product",
-            lucideIcon: Plus,
+            iconName: "plus",
             iconClassName: "size-6",
             href: "/products/add",
             className:
@@ -41,11 +40,11 @@ const Page = () => {
           </div>
           <div className="flex items-center gap-4">
             <IconButton
-              lucideIcon={Pencil}
+              iconName="pencil"
               className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"
             />
             <IconButton
-              lucideIcon={Trash}
+              iconName="trash"
               className="size-10 bg-white text-blue-500 border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600"
             />
           </div>
@@ -90,7 +89,7 @@ const Page = () => {
         </div>
         <div className="w-full h-9 flex items-center justify-between">
           <div className="w-96 flex items-center justify-between">
-            <IconButton lucideIcon={ArrowLeft} className="text-slate-400" />
+            <IconButton iconName="arrowLeft" className="text-slate-400" />
             <ul className="flex-1 flex items-center text-base text-slate-600 mx-2">
               <li>
                 <Link href="#">1</Link>
@@ -99,7 +98,7 @@ const Page = () => {
                 <Link href="#">...</Link>
               </li>
             </ul>
-            <IconButton lucideIcon={ArrowRight} className="text-slate-400" />
+            <IconButton iconName="arrowRight" className="text-slate-400" />
           </div>
           <span className="text-base text-slate-600">Results</span>
         </div>

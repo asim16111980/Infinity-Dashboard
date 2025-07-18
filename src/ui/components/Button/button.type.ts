@@ -1,6 +1,6 @@
-import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { ReactElement } from "react";
+import { IconName } from "../Icon/icons";
 
 type LinkChild = ReactElement<typeof Link>;
 
@@ -10,7 +10,7 @@ export interface ButtonProps
   href?: string;
   variant?: "primary" | "secondary";
   children?: LinkChild;
-  lucideIcon?: LucideIcon;
+  iconName?: IconName;
   iconClassName?: string;
   title?: string;
 }

@@ -1,4 +1,3 @@
-import { ArrowLeft } from "lucide-react";
 import RegularButton from "../Button/RegularButton";
 import { PageHeaderProps } from "./PageHeader.type";
 import Link from "next/link";
@@ -12,15 +11,13 @@ const PageHeader = ({
     <div className="w-full flex items-center justify-between">
       <div className="flex flex-col">
         {backButton && (
-          <Link href="#">
-            <RegularButton
-              asLink
-              title="back"
-              lucideIcon={ArrowLeft}
-              iconClassName="size-3.5 text-slate-500"
-              className="w-12 h-5 text-sm text-slate-600 gap-1"
-            />
-          </Link>
+          <RegularButton
+            asLink
+            title="back"
+            iconName="arrowLeft"
+            iconClassName="size-3.5 text-slate-500"
+            className="w-12 h-5 text-sm text-slate-600 gap-1"
+          />
         )}
         <h2 className="text-2xl font-bold text-gray-900 capitalize">{title}</h2>
       </div>

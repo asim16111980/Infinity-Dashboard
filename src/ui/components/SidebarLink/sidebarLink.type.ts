@@ -1,9 +1,9 @@
-import { LucideIcon } from "lucide-react";
+import { IconName } from "../Icon/icons";
 
 export interface SidebarLinkProps {
   isActive?: boolean;
   href: string;
-  lucideIcon: LucideIcon;
+  iconName: IconName;
   label: string;
   badgeCount?: number;
 }
