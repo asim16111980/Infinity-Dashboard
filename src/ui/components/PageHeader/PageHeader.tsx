@@ -16,7 +16,7 @@ const PageHeader = ({
             title="back"
             iconName="arrowLeft"
             iconClassName="size-3.5 text-slate-500"
-            className="w-12 h-5 text-sm text-slate-600 gap-1"
+            className="w-12 h-5 p-0 text-sm text-slate-600 gap-1"
           />
         )}
         <h2 className="text-2xl font-bold text-gray-900 capitalize">{title}</h2>
