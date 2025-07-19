@@ -1,5 +1,6 @@
+import TextInput from "@/ui/components/TextInput/TextInput";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
-import { Plus } from "lucide-react";
+import Textarea from "@/ui/components/Textarea/Textarea";
 
 const Page = () => {
   return (
@@ -10,17 +11,48 @@ const Page = () => {
           {
             variant: "secondary",
             title: "cancel",
-            className: "w-24 h-10 bg-white text-base text-blue-700 rounded",
+            className: "bg-white text-base text-blue-700 rounded",
           },
           {
-            title: "add product",
+            title: "save",
             href: "/products/add",
             className:
-              "w-40 h-10 gap-2 text-white text-base bg-blue-700 rounded",
+              "text-white text-base bg-blue-700 rounded",
           },
         ]}
         backButton
       />
+      <div className="w-full flex-1 flex gap-4">
+        <div className="flex-1 flex flex-col bg-white rounded-md px-4 shadow divide-y divide-slate-200">
+          <div className="flex flex-col gap-4 py-6">
+            <h3 className="text-base font-bold text-slate-900">Information</h3>
+            <TextInput
+              label="Product Name"
+              // value=""
+              // onChange={() => {}}
+              placeholder="product name"
+            />
+            <Textarea
+              label="Product Description"
+              placeholder="Product description"
+            />
+          </div>
+          <div className="flex flex-col gap-4 py-6">
+            <h3 className="text-base font-bold text-slate-900">Information</h3>
+            <TextInput
+              label="Product Name"
+              // value=""
+              // onChange={() => {}}
+              placeholder="product name"
+            />
+            <Textarea
+              label="Product Description"
+              placeholder="Product description"
+            />
+          </div>
+        </div>
+        <div className="w-96"></div>
+      </div>
     </section>
   );
 };

@@ -15,7 +15,7 @@ const Page = () => {
           {
             variant: "secondary",
             title: "export",
-            className: "w-24 h-10 bg-white text-base text-blue-700 rounded",
+            className: "bg-white text-base text-blue-700 rounded",
           },
           {
             asLink: true,
@@ -24,7 +24,7 @@ const Page = () => {
             iconClassName: "size-6",
             href: "/products/add",
             className:
-              "w-40 h-10 gap-2 text-white text-base bg-blue-700 rounded",
+              "text-white text-base bg-blue-700 rounded",
           },
         ]}
       />
