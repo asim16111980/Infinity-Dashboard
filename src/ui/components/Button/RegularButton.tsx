@@ -13,14 +13,14 @@ const RegularButton = ({
   title,
   iconName,
   iconClassName,
-  // className,
+  className,
   onClick,
   children,
   ...props
 }: React.PropsWithChildren<ButtonProps>) => {
   const classes = clsx(
     "flex items-center justify-center rounded select-none",
-    props.className || [
+    className || [
       "gap-2 px-6 py-2",
       {
         "text-white text-base bg-blue-700": variant === "primary",
