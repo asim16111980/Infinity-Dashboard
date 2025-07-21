@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { ButtonProps } from "./button.type";
 import Icon from "../Icon/Icon";
 
-const IconButton = ({ iconName, className, onClick }: ButtonProps) => {
+const IconButton = ({ iconName,iconClassName, className, onClick }: ButtonProps) => {
   return (
     <button
       type="button"
@@ -15,7 +15,7 @@ const IconButton = ({ iconName, className, onClick }: ButtonProps) => {
       )}
       onClick={onClick}
     >
-      {iconName && <Icon name={iconName} />}
+      {iconName && <Icon name={iconName} className={iconClassName}/>}
     </button>
   );
 };
