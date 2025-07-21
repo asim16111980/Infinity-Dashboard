@@ -5,7 +5,7 @@ import { DropdownProps } from "./dropdown.type";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
-const Dropdown = ({ title, items, className }: DropdownProps) => {
+const Dropdown = ({ label, title, items, className,onChange }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(
     null
@@ -15,7 +15,11 @@ const Dropdown = ({ title, items, className }: DropdownProps) => {
   const handleSelectItem = (index: number) => {
     setSelectedItemIndex(index);
     setIsOpen(false);
+    if (onChange) {
+      onChange(items[index], index);
+    }
   };
+  
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -34,52 +38,58 @@ const Dropdown = ({ title, items, className }: DropdownProps) => {
   }, []);
 
   return (
-    <div
-      ref={dropdownRef}
-      className={clsx(
-        "w-44 h-10 relative bg-white border border-slate-200 rounded",
-        className
-      )}
-    >
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        className="size-full flex items-center justify-between px-4"
-        onClick={() => setIsOpen((val) => !val)}
-      >
-        <span className="capitalize text-base text-slate-400">
-          {selectedItemIndex === null ? title : items[selectedItemIndex]}
-        </span>
-        {
-          <ChevronDown
-            className={clsx("transition-transform duration-300 text-slate-500", {
-              "rotate-180": isOpen,
-              "rotate-0": !isOpen,
-            })}
-          />
-        }
-      </button>
-      <ul
+    <label className="flex flex-col gap-1 select-none">
+      <span className="text-sm text-slate-600 capitalize">{label}</span>
+      <div
+        ref={dropdownRef}
         className={clsx(
-          "w-full flex flex-col absolute top-full left-0 bg-white border border-slate-200 rounded shadow-md overflow-hidden z-50 transition duration-300",
-          {
-            "opacity-100 visible translate-y-0": isOpen,
-            "opacity-0 invisible -translate-y-2": !isOpen,
-          }
+          "w-44 h-10 relative bg-white border border-slate-200 rounded",
+          className
         )}
       >
-        {items.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleSelectItem(index)}
-            className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <button
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          className="size-full flex items-center justify-between px-4"
+          onClick={() => setIsOpen((val) => !val)}
+        >
+          <span className="capitalize text-base text-slate-400">
+            {selectedItemIndex === null ? title : items[selectedItemIndex]}
+          </span>
+          {
+            <ChevronDown
+              className={clsx(
+                "transition-transform duration-300 text-slate-500",
+                {
+                  "rotate-180": isOpen,
+                  "rotate-0": !isOpen,
+                }
+              )}
+            />
+          }
+        </button>
+        <ul
+          className={clsx(
+            "w-full flex flex-col absolute top-full left-0 bg-white border border-slate-200 rounded shadow-md overflow-hidden z-50 transition duration-300",
+            {
+              "opacity-100 visible translate-y-0": isOpen,
+              "opacity-0 invisible -translate-y-2": !isOpen,
+            }
+          )}
+        >
+          {items.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleSelectItem(index)}
+              className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </label>
   );
 };
 

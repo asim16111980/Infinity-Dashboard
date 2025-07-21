@@ -2,6 +2,8 @@ import TextInput from "@/ui/components/TextInput/TextInput";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
+import ToggleButton from "@/ui/components/Button/ToggleButton";
+import Dropdown from "@/ui/components/Dropdown/Dropdown";
 
 const Page = () => {
   return (
@@ -37,6 +39,25 @@ const Page = () => {
           <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900">Images</h3>
             <FileUploader />
+          </div>
+          <div className="flex flex-col gap-4 py-6">
+            <h3 className="text-base font-bold text-slate-900">Price</h3>
+            <div className="flex items-center justify-between">
+              <TextInput label="Product Price" placeholder="Enter price" />
+              <TextInput
+                label="Discount Price"
+                placeholder="Price at Discount"
+              />
+            </div>
+            <ToggleButton label="Add tax for this product" />
+          </div>
+          <div className="flex flex-col gap-4 py-6">
+            <h3 className="text-base font-bold text-slate-900">
+              Different Options
+            </h3>
+            <ToggleButton label="This product has multiple options" checked />
+            <Dropdown label="size" title="size" items={["size", "color"]} />
+            <ProductOptionSelector options={["size", "color"]} onOptionChange={} onRemoveValue={} selectedOption="" values={}/>
           </div>
         </div>
         <div className="w-96"></div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import RegularButton from "../Button/RegularButton";
 import { clsx } from "clsx";
 import IconButton from "../Button/IconButton";
+import { filterAndPrepareImageFiles } from "@/utils/fileUtils";
 
 const FileUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -11,31 +12,23 @@ const FileUploader = () => {
     { file: File; url: string }[]
   >([]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const newFiles = Array.from(files).map((file) => ({
-        file,
-        url: URL.createObjectURL(file),
-      }));
-      setSelectedFiles((prev) => [...prev, ...newFiles]);
-    }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+
+    setSelectedFiles((prev) => filterAndPrepareImageFiles(files, prev));
   };
 
   const handleClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files) {
-      const newFiles = Array.from(files).map((file) => ({
-        file,
-        url: URL.createObjectURL(file),
-      }));
-      setSelectedFiles((prev) => [...prev, ...newFiles]);
-    }
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    if (!files) return;
+
+    setSelectedFiles((prev) => filterAndPrepareImageFiles(files, prev));
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -55,14 +48,12 @@ const FileUploader = () => {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      {/* <div className="size-full flex flex-wrap justify-center gap-2 overflow-y-auto"> */}
       <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-2 overflow-y-auto">
-
         <div
-          className={clsx(
-            "flex flex-col items-center justify-center gap-2",
-            selectedFiles.length > 0 && "bg-slate-700 bg-opacity-5"
-          )}
+          className={clsx("flex flex-col items-center justify-center gap-2", {
+            "bg-slate-700 bg-opacity-5": selectedFiles.length > 0,
+            "col-span-full": selectedFiles.length === 0,
+          })}
         >
           <RegularButton
             variant="secondary"
@@ -91,14 +82,11 @@ const FileUploader = () => {
         </div>
         {selectedFiles.length > 0 &&
           selectedFiles.map((file, idx) => (
-            <div
-              key={idx}
-              className="relative h-40 overflow-hidden rounded"
-            >
+            <div key={idx} className="relative h-40 overflow-hidden rounded">
               <img
                 src={file.url}
                 alt={file.file.name}
-                className="size-full object-cover rounded"
+                className="size-full object-contain rounded"
               />
               <IconButton
                 onClick={handleRemove.bind(null, idx)}

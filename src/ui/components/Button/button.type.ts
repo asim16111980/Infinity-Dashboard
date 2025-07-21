@@ -14,3 +14,9 @@ export interface ButtonProps
   iconClassName?: string;
   title?: string;
 }
+
+export interface ToggleButtonProps{
+  label?: string;
+  className?: string;
+  checked?: boolean;
+}
