@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Home,
   Tag,
+  X,
 } from "lucide-react";
 
 export const ICONS_MAP = {
@@ -18,6 +19,7 @@ export const ICONS_MAP = {
   trash: Trash,
   home: Home,
   tag: Tag,
+  x: X,
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;
