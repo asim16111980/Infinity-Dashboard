@@ -1,6 +1,6 @@
 export interface ProductOptionValuesProps {
   label?: string;
-  selectedOption: string;
+  optionValues?: string|string[];
   initialValues: string[];
   className?: string;
   onRemoveValue?: (selectedOption: string, value: string) => void;

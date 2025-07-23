@@ -1,25 +1,31 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { DropdownProps } from "./dropdown.type";
+import { DropdownOption, DropdownProps } from "./dropdown.type";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
-const Dropdown = ({ label, title, items, className,onChange }: DropdownProps) => {
+const Dropdown = ({
+  label,
+  title,
+  initialOption,
+  options,
+  className,
+  onChange,
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleSelectItem = (index: number) => {
-    setSelectedItemIndex(index);
+  const handleSelectOption = (option: DropdownOption) => {
+    setSelectedOption(option);
     setIsOpen(false);
     if (onChange) {
-      onChange(items[index], index);
+      onChange(option);
     }
   };
-  
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -55,7 +61,7 @@ const Dropdown = ({ label, title, items, className,onChange }: DropdownProps) =>
           onClick={() => setIsOpen((val) => !val)}
         >
           <span className="capitalize text-base text-slate-400">
-            {selectedItemIndex === null ? title : items[selectedItemIndex]}
+            {selectedOption?.label || title}
           </span>
           {
             <ChevronDown
@@ -78,13 +84,16 @@ const Dropdown = ({ label, title, items, className,onChange }: DropdownProps) =>
             }
           )}
         >
-          {items.map((item, index) => (
+          {options.map((option, index) => (
             <li
               key={index}
-              onClick={() => handleSelectItem(index)}
-              className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
+              onClick={() => handleSelectOption(option)}
+              className={clsx("px-4 py-2 hover:bg-slate-100 cursor-pointer", {
+                "opacity-40 cursor-not-allowed pointer-events-none":
+                  option.disabled,
+              })}
             >
-              {item}
+              {option.label}
             </li>
           ))}
         </ul>

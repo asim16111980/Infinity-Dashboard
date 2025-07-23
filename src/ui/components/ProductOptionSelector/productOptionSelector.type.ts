@@ -1,11 +1,8 @@
-export type OptionValues = {
-  option: string;
-  values: string[];
-};
-
+import { DropdownOption } from "../Dropdown";
 export interface ProductOptionSelectorProps {
   label?: string;
-  optionsValues: OptionValues[];
+  initialOption: DropdownOption;
+  optionsValues: DropdownOption[];
   // options: string[];
   // selectedOption: string;
   // onOptionChange: (option: string) => void;

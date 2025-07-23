@@ -10,7 +10,7 @@ const ProductOptionsManager = ({
 }: ProductOptionsManagerProps) => {
   const [optionCount, setOptionCount] = useState<number>(1);
   const [optionsValues, setOptionsValues] =
-    useState<OptionValues[]>(initialOptionsValues);
+    useState<OptionValues[]>([]);
 
   const handleRemoveValue = (selectedOption: string, value: string) => {
     setOptionsValues((prev) =>
@@ -30,6 +30,7 @@ const ProductOptionsManager = ({
       {optionCount > 0 && (
         <ProductOptionSelector
           label={`Option ${optionCount}`}
+          initialOption={optionsValues[0]}
           optionsValues={initialOptionsValues}
           onRemoveValue={handleRemoveValue}
         />

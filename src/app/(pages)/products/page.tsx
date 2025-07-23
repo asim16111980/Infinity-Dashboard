@@ -28,7 +28,7 @@ const Page = () => {
       <div className="w-full flex-1 flex flex-col gap-7 p-7 bg-white rounded-md shadow">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Dropdown title="filter" items={FILTER_ITEMS} />
+            <Dropdown title="filter" options={FILTER_ITEMS} />
             <SearchBox
               className="w-80 h-10 rounded bg-white border border-slate-200"
               iconClassName="text-slate-500"

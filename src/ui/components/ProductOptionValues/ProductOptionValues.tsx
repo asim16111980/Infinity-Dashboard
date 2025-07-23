@@ -6,7 +6,7 @@ import { ProductOptionValuesProps } from "./productOptionValues.type";
 
 const ProductOptionValues = ({
   label,
-  selectedOption,
+  optionValues,
   initialValues,
   className,
   onRemoveValue,

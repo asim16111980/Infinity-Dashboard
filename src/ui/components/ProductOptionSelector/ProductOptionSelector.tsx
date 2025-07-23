@@ -2,25 +2,47 @@ import { useState } from "react";
 import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
 import ProductOptionValues from "../ProductOptionValues";
+import { DropdownOption } from "../Dropdown";
 
 const ProductOptionSelector = ({
   label,
+  initialOption,
   optionsValues,
   onRemoveValue,
 }: ProductOptionSelectorProps) => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOption, setSelectedOption] =
+    useState<DropdownOption>(initialOption);
 
-  const handleChangeOption = (selectedItem: string) => {
-    setSelectedOption(selectedItem);
+  const handleChangeOption = (selectedOption: DropdownOption) => {
+    setSelectedOption(selectedOption);
   };
 
   const foundOptionValues = optionsValues.find(
-    ({ option }) => option === selectedOption
+    (option) => option.label === selectedOption?.label
   );
 
   const handleRemoveValue = (value: string) => {
+    if (selectedOption.value.length > 0) {
+      setSelectedOption((prev) => {
+        if (!prev) return prev;
+        const newValues = prev.value.filter((v) => v !== value);
+        return {
+          ...prev,
+          value: newValues,
+        };
+      });
+    } else {
+      setSelectedOption((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          disabled: true,
+        };
+      });      
+    }
+
     if (selectedOption && onRemoveValue) {
-      onRemoveValue(selectedOption, value);
+      onRemoveValue(selectedOption.label, value);
     }
   };
 
@@ -28,17 +50,17 @@ const ProductOptionSelector = ({
     <div className="flex flex-col gap-2">
       <label className="text-sm text-slate-600">{label}</label>
       <Dropdown
-        label="Select Option"
-        title={selectedOption || "Select an option"}
-        items={optionsValues.map((optionValue) => optionValue.option)}
+        label={selectedOption?.label}
+        initialOption={initialOption}
+        options={optionsValues}
         onChange={handleChangeOption}
       />
-      <label className="text-sm text-slate-600">Values</label>
+      <label className="text-sm text-slate-600">Value</label>
       {foundOptionValues && (
         <ProductOptionValues
           label="Values"
-          initialValues={foundOptionValues.values}
-          selectedOption={selectedOption}
+          // initialValues={foundOptionValues.values}
+          optionValues={selectedOption?.value}
           onRemoveValue={handleRemoveValue}
         />
       )}
