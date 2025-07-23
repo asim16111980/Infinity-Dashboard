@@ -4,6 +4,7 @@ import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import Dropdown from "@/ui/components/Dropdown/Dropdown";
+import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 
 const Page = () => {
   return (
@@ -57,7 +58,12 @@ const Page = () => {
             </h3>
             <ToggleButton label="This product has multiple options" checked />
             <Dropdown label="size" title="size" items={["size", "color"]} />
-            <ProductOptionSelector options={["size", "color"]} onOptionChange={} onRemoveValue={} selectedOption="" values={}/>
+            <ProductOptionsManager
+              initialOptionsValues={[
+                { option: "color", values: ["red", "blue", "green"] },
+                { option: "size", values: ["small", "medium", "large"] },
+              ]}
+            />
           </div>
         </div>
         <div className="w-96"></div>

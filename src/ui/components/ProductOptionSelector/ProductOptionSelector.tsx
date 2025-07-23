@@ -1,31 +1,26 @@
-"use client";
-
 import { useState } from "react";
+import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
-import {
-  ProductOptionSelectorProps,
-  OptionValues,
-} from "./productOptionSelector.type";
-import ProductOptionValues from "../ProductOptionValues/ProductOptionValues";
+import ProductOptionValues from "../ProductOptionValues";
 
 const ProductOptionSelector = ({
   label,
-  options,
-  selectedOption,
-  onOptionChange,
   optionsValues,
   onRemoveValue,
 }: ProductOptionSelectorProps) => {
-  const [optionValues, setOptionValues] = useState<OptionValues>({
-    option: "",
-    values: [],
-  });
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
   const handleChangeOption = (selectedItem: string) => {
-    const found = optionsValues.find(({ option }) => option === selectedItem);
+    setSelectedOption(selectedItem);
+  };
 
-    if (found) {
-      setOptionValues({ option: selectedItem, values: found.values });
+  const foundOptionValues = optionsValues.find(
+    ({ option }) => option === selectedOption
+  );
+
+  const handleRemoveValue = (value: string) => {
+    if (selectedOption && onRemoveValue) {
+      onRemoveValue(selectedOption, value);
     }
   };
 
@@ -33,13 +28,21 @@ const ProductOptionSelector = ({
     <div className="flex flex-col gap-2">
       <label className="text-sm text-slate-600">{label}</label>
       <Dropdown
-        label="size"
-        title="size"
-        items={["size", "color"]}
-        // onChange={}
+        label="Select Option"
+        title={selectedOption || "Select an option"}
+        items={optionsValues.map((optionValue) => optionValue.option)}
+        onChange={handleChangeOption}
       />
       <label className="text-sm text-slate-600">Values</label>
-      <ProductOptionValues label="value" initialValues={optionValues.values} />
+      {foundOptionValues && (
+        <ProductOptionValues
+          label="Values"
+          initialValues={foundOptionValues.values}
+          selectedOption={selectedOption}
+          onRemoveValue={handleRemoveValue}
+        />
+      )}
     </div>
   );
 };
+export default ProductOptionSelector;

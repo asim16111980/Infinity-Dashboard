@@ -6,16 +6,21 @@ import { ProductOptionValuesProps } from "./productOptionValues.type";
 
 const ProductOptionValues = ({
   label,
+  selectedOption,
   initialValues,
   className,
+  onRemoveValue,
 }: ProductOptionValuesProps) => {
   const [values, setValues] = useState<string[]>(initialValues);
 
-  const handleRemoveValue = (value: string) => {
+  const handleRemoveValue = (selectedOption: string, value: string) => {
     const newValues = values.filter((initialValue) => {
       return value !== initialValue;
     });
     setValues(newValues);
+    if (onRemoveValue) {
+      onRemoveValue(selectedOption, value);
+    }
   };
 
   return (
@@ -29,7 +34,7 @@ const ProductOptionValues = ({
           <span>{value}</span>
           <IconButton
             name="x"
-            onClick={() => handleRemoveValue(value)}
+            onClick={() => handleRemoveValue(selectedOption, value)}
             className="size-6 text-slate-400"
           />
         </span>
