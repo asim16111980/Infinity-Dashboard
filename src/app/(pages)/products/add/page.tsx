@@ -1,3 +1,5 @@
+"use client";
+
 import TextInput from "@/ui/components/TextInput/TextInput";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import Textarea from "@/ui/components/Textarea/Textarea";
@@ -5,8 +7,10 @@ import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import Dropdown from "@/ui/components/Dropdown/Dropdown";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
+import { useState } from "react";
 
 const Page = () => {
+  const [hasMultipleOptions, setHasMultipleOptions] = useState(false);
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader
@@ -56,14 +60,19 @@ const Page = () => {
             <h3 className="text-base font-bold text-slate-900">
               Different Options
             </h3>
-            <ToggleButton label="This product has multiple options" checked />
-            <Dropdown label="size" title="size" items={["size", "color"]} />
-            <ProductOptionsManager
-              initialOptionsValues={[
-                { option: "color", values: ["red", "blue", "green"] },
-                { option: "size", values: ["small", "medium", "large"] },
-              ]}
+            <ToggleButton
+              label="This product has multiple options"
+              checked={hasMultipleOptions}
+              onChange={() => setHasMultipleOptions(!hasMultipleOptions)}
             />
+            {hasMultipleOptions && (
+              <ProductOptionsManager
+                initialOptions={[
+                  { label: "color", value: ["red", "blue", "green"] },
+                  { label: "size", value: ["small", "medium", "large"] },
+                ]}
+              />
+            )}
           </div>
         </div>
         <div className="w-96"></div>

@@ -3,23 +3,24 @@
 import { useState } from "react";
 import IconButton from "../Button/IconButton";
 import { ProductOptionValuesProps } from "./productOptionValues.type";
+import { DropdownOption } from "../Dropdown";
 
 const ProductOptionValues = ({
   label,
-  optionValues,
-  initialValues,
+  // initialValues,
+  selectedOption,
   className,
   onRemoveValue,
 }: ProductOptionValuesProps) => {
-  const [values, setValues] = useState<string[]>(initialValues);
+  const [values, setValues] = useState<string[]>(selectedOption.value || []);
 
-  const handleRemoveValue = (selectedOption: string, value: string) => {
+  const handleRemoveValue = (selectedLabel: string, value: string) => {
     const newValues = values.filter((initialValue) => {
       return value !== initialValue;
     });
     setValues(newValues);
     if (onRemoveValue) {
-      onRemoveValue(selectedOption, value);
+      onRemoveValue(selectedLabel, value);
     }
   };
 
@@ -34,7 +35,7 @@ const ProductOptionValues = ({
           <span>{value}</span>
           <IconButton
             name="x"
-            onClick={() => handleRemoveValue(selectedOption, value)}
+            onClick={() => handleRemoveValue(selectedOption.label, value)}
             className="size-6 text-slate-400"
           />
         </span>

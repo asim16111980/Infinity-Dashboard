@@ -7,7 +7,7 @@ import { DropdownOption } from "../Dropdown";
 const ProductOptionSelector = ({
   label,
   initialOption,
-  optionsValues,
+  options,
   onRemoveValue,
 }: ProductOptionSelectorProps) => {
   const [selectedOption, setSelectedOption] =
@@ -17,7 +17,7 @@ const ProductOptionSelector = ({
     setSelectedOption(selectedOption);
   };
 
-  const foundOptionValues = optionsValues.find(
+  const foundOption = options.find(
     (option) => option.label === selectedOption?.label
   );
 
@@ -36,9 +36,9 @@ const ProductOptionSelector = ({
         if (!prev) return prev;
         return {
           ...prev,
-          disabled: true,
+          disabled: false,
         };
-      });      
+      });
     }
 
     if (selectedOption && onRemoveValue) {
@@ -52,15 +52,14 @@ const ProductOptionSelector = ({
       <Dropdown
         label={selectedOption?.label}
         initialOption={initialOption}
-        options={optionsValues}
+        options={options}
         onChange={handleChangeOption}
       />
       <label className="text-sm text-slate-600">Value</label>
-      {foundOptionValues && (
+      {foundOption && (
         <ProductOptionValues
           label="Values"
-          // initialValues={foundOptionValues.values}
-          optionValues={selectedOption?.value}
+          selectedOption={selectedOption}
           onRemoveValue={handleRemoveValue}
         />
       )}
