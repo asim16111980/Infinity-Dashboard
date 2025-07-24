@@ -10,7 +10,7 @@ import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
 
 const Page = () => {
-  const [hasMultipleOptions, setHasMultipleOptions] = useState(false);
+  const [hasMultipleOptions, setHasMultipleOptions] = useState(true);
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader

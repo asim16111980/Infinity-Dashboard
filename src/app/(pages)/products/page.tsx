@@ -46,7 +46,7 @@ const Page = () => {
             />
           </div>
         </div>
-        <div className="w-full flex-1 overflow-x-auto">
+        <div className="w-full flex-1 overflow-x-auto select-none">
           <table className="min-w-full">
             <thead className="w-full h-11 border-b-2 border-slate-200">
               <tr className="text-sm text-slate-500">

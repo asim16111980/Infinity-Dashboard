@@ -47,23 +47,24 @@ const ProductOptionSelector = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <label className="text-sm text-slate-600">{label}</label>
-      <Dropdown
-        label={selectedOption?.label}
-        initialOption={initialOption}
-        options={options}
-        onChange={handleChangeOption}
-      />
-      <label className="text-sm text-slate-600">Value</label>
-      {foundOption && (
-        <ProductOptionValues
-          label="Values"
-          selectedOption={selectedOption}
-          onRemoveValue={handleRemoveValue}
+    <label className="flex flex-col gap-4">
+      <span className="text-base font-bold text-slate-900">{label}</span>
+      <div className="flex items-center gap-6">
+        <Dropdown
+          label={selectedOption?.label}
+          initialOption={initialOption}
+          options={options}
+          onChange={handleChangeOption}
         />
-      )}
-    </div>
+        {foundOption && (
+          <ProductOptionValues
+            label="Value"
+            selectedOption={selectedOption}
+            onRemoveValue={handleRemoveValue}
+          />
+        )}
+      </div>
+    </label>
   );
 };
 export default ProductOptionSelector;

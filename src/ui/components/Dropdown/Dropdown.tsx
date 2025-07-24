@@ -14,9 +14,9 @@ const Dropdown = ({
   onChange,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
-  );
+  const [selectedOption, setSelectedOption] = useState<
+    DropdownOption | undefined
+  >(initialOption);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSelectOption = (option: DropdownOption) => {
@@ -41,7 +41,7 @@ const Dropdown = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <label className="flex flex-col gap-1 select-none">
@@ -49,7 +49,7 @@ const Dropdown = ({
       <div
         ref={dropdownRef}
         className={clsx(
-          "w-44 h-10 relative bg-white border border-slate-200 rounded",
+          "min-w-44 h-10 relative bg-white border border-slate-200 rounded",
           className
         )}
       >
@@ -87,7 +87,7 @@ const Dropdown = ({
           {options.map((option, index) => (
             <li
               key={index}
-              onClick={() => handleSelectOption(option)}
+              onMouseDown={() => handleSelectOption(option)}
               className={clsx("px-4 py-2 hover:bg-slate-100 cursor-pointer", {
                 "opacity-40 cursor-not-allowed pointer-events-none":
                   option.disabled,
@@ -103,4 +103,3 @@ const Dropdown = ({
 };
 
 export default Dropdown;
-5;

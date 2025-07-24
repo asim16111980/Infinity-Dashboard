@@ -36,13 +36,14 @@ const ProductOptionsManager = ({
   };
 
   useEffect(() => {
+    setOptionCount(0);
     if (optionsValues.length === 0 && initialOptions.length > 0) {
       addNewOptionSelector();
     }
   }, [initialOptions]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col items-start gap-4">
       {optionCount > 0 && (
         <ProductOptionSelector
           label={`Option ${optionCount}`}
@@ -51,7 +52,7 @@ const ProductOptionsManager = ({
           onRemoveValue={handleRemoveValue}
         />
       )}
-      <RegularButton title="add more" onClick={addNewOptionSelector} />
+      <RegularButton title="add more" onClick={addNewOptionSelector} className="text-blue-600"/>
     </div>
   );
 };
