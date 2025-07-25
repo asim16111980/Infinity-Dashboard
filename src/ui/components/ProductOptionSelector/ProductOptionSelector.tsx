@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
 import ProductOptionValues from "../ProductOptionValues";
@@ -17,11 +17,9 @@ const ProductOptionSelector = ({
     setSelectedOption(selectedOption);
   };
 
-  const foundOption = options.find(
-    (option) => option.label === selectedOption?.label
-  );
-
-  const handleRemoveValue = (value: string) => {
+  const handleRemoveValue = (selectedLabel: string, value: string) => {
+    console.log("Removing value:", value);
+    
     if (selectedOption.value.length > 0) {
       setSelectedOption((prev) => {
         if (!prev) return prev;
@@ -41,10 +39,15 @@ const ProductOptionSelector = ({
       });
     }
 
-    if (selectedOption && onRemoveValue) {
-      onRemoveValue(selectedOption.label, value);
-    }
+    // if (selectedOption && onRemoveValue) {
+    //   onRemoveValue(selectedOption.label, value);
+    // }
   };
+
+  useEffect(() => {
+    console.log(selectedOption);
+    
+  }, [selectedOption]);
 
   return (
     <label className="flex flex-col gap-4">
@@ -56,7 +59,7 @@ const ProductOptionSelector = ({
           options={options}
           onChange={handleChangeOption}
         />
-        {foundOption && (
+        {selectedOption?.value.length > 0 && (
           <ProductOptionValues
             label="Value"
             selectedOption={selectedOption}
