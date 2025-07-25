@@ -22,6 +22,7 @@ const Dropdown = ({
   const handleSelectOption = (option: DropdownOption) => {
     setSelectedOption(option);
     setIsOpen(false);
+
     if (onChange) {
       onChange(option);
     }
@@ -44,7 +45,7 @@ const Dropdown = ({
   }, [isOpen]);
 
   return (
-    <label className="flex flex-col gap-1 select-none">
+    <div className="flex flex-col gap-1 select-none">
       <span className="text-sm text-slate-600 capitalize">{label}</span>
       <div
         ref={dropdownRef}
@@ -87,7 +88,7 @@ const Dropdown = ({
           {options.map((option, index) => (
             <li
               key={index}
-              onMouseDown={() => handleSelectOption(option)}
+              onClick={() => handleSelectOption(option)}
               className={clsx("px-4 py-2 hover:bg-slate-100 cursor-pointer", {
                 "opacity-40 cursor-not-allowed pointer-events-none":
                   option.disabled,
@@ -98,7 +99,7 @@ const Dropdown = ({
           ))}
         </ul>
       </div>
-    </label>
+    </div>
   );
 };
 

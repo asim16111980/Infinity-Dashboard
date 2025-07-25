@@ -3,29 +3,40 @@
 import { useEffect, useState } from "react";
 import IconButton from "../Button/IconButton";
 import { ProductOptionValuesProps } from "./productOptionValues.type";
+import clsx from "clsx";
 
 const ProductOptionValues = ({
   label,
-  selectedOption,
+  initialValues,
   className,
   onRemoveValue,
 }: ProductOptionValuesProps) => {
+  const [values, setValues] = useState<string[]>(initialValues);
 
-  const handleRemoveValue = (selectedLabel: string, value: string) => {
-    if (onRemoveValue) {
-      onRemoveValue(selectedLabel, value);
-    }
+  const handleRemoveValue = (removedValue: string) => {
+    setValues(values.filter((v) => v !== removedValue));
   };
+  // if (onRemoveValue) {
+  //   onRemoveValue(values);
+  // }
 
   useEffect(() => {
-    console.log("ProductOptionValues mounted or updated");
-  }, []);
+ 
+    console.log("t");
+    
+    setValues(initialValues);
+  }, [initialValues]);
 
   return (
-    <label className="w-full flex flex-col gap-1 text-sm text-slate-600 bg-white capitalize select-none">
+    <div
+      className={clsx(
+        "w-full flex flex-col gap-1 text-sm text-slate-600 bg-white capitalize select-none",
+        className
+      )}
+    >
       <span className="text-sm text-slate-600">{label}</span>
       <div className="w-fit h-10 flex items-center gap-2 px-4 py-2 rounded border border-slate-200">
-        {selectedOption.value.map((value, index) => (
+        {values.map((value, index) => (
           <span
             key={index}
             className="w-fit h-6 flex items-center justify-center gap-1 p-2 bg-slate-200 rounded"
@@ -33,13 +44,13 @@ const ProductOptionValues = ({
             <span>{value}</span>
             <IconButton
               iconName="x"
-              onClick={() => handleRemoveValue(selectedOption.label, value)}
+              onClick={() => handleRemoveValue(value)}
               className="size-6 text-slate-400 p-0.5"
             />
           </span>
         ))}
       </div>
-    </label>
+    </div>
   );
 };
 

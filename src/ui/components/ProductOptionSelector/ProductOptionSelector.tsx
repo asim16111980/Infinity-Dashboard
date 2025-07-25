@@ -7,7 +7,7 @@ import { DropdownOption } from "../Dropdown";
 const ProductOptionSelector = ({
   label,
   initialOption,
-  options,
+  initialOptions,
   onRemoveValue,
 }: ProductOptionSelectorProps) => {
   const [selectedOption, setSelectedOption] =
@@ -17,57 +17,55 @@ const ProductOptionSelector = ({
     setSelectedOption(selectedOption);
   };
 
-  const handleRemoveValue = (selectedLabel: string, value: string) => {
-    console.log("Removing value:", value);
+  const handleRemoveValue = (values: string[]) => {
+    console.log(values);
     
-    if (selectedOption.value.length > 0) {
-      setSelectedOption((prev) => {
-        if (!prev) return prev;
-        const newValues = prev.value.filter((v) => v !== value);
-        return {
-          ...prev,
-          value: newValues,
-        };
-      });
-    } else {
-      setSelectedOption((prev) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          disabled: false,
-        };
-      });
-    }
-
-    // if (selectedOption && onRemoveValue) {
-    //   onRemoveValue(selectedOption.label, value);
+    setSelectedOption({ ...selectedOption, value: values });
+    // if (selectedOption.value.length > 0) {
+    //   setSelectedOption((prev) => {
+    //     if (!prev) return prev;
+    //     const newValues = prev.value.filter((v) => v !== value);
+    //     return {
+    //       ...prev,
+    //       value: newValues,
+    //     };
+    //   });
+    // } else {
+    //   setSelectedOption((prev) => {
+    //     if (!prev) return prev;
+    //     return {
+    //       ...prev,
+    //       disabled: false,
+    //     };
+    //   });
     // }
   };
 
-  useEffect(() => {
-    console.log(selectedOption);
-    
-  }, [selectedOption]);
+  // useEffect(() => {
+  //   if (selectedOption && onRemoveValue) {
+  //     onRemoveValue(selectedOption);
+  //   }
+  // }, [selectedOption]);
 
   return (
-    <label className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <span className="text-base font-bold text-slate-900">{label}</span>
       <div className="flex items-center gap-6">
         <Dropdown
-          label={selectedOption?.label}
+          label={selectedOption.label}
           initialOption={initialOption}
-          options={options}
+          options={initialOptions}
           onChange={handleChangeOption}
         />
-        {selectedOption?.value.length > 0 && (
+        {selectedOption.value.length > 0 && (
           <ProductOptionValues
             label="Value"
-            selectedOption={selectedOption}
+            initialValues={selectedOption.value}
             onRemoveValue={handleRemoveValue}
           />
         )}
       </div>
-    </label>
+    </div>
   );
 };
 export default ProductOptionSelector;

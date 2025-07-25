@@ -44,14 +44,14 @@ const ProductOptionsManager = ({
 
   return (
     <div className="w-full flex flex-col items-start gap-4">
-      {optionCount > 0 && (
+      {/* {optionCount > 0 && (
         <ProductOptionSelector
           label={`Option ${optionCount}`}
           initialOption={optionsValues[0]}
           options={initialOptions}
           onRemoveValue={handleRemoveValue}
         />
-      )}
+      )} */}
       <RegularButton title="add more" onClick={addNewOptionSelector} className="text-blue-600"/>
     </div>
   );
