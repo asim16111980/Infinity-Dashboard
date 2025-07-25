@@ -15,15 +15,12 @@ const ProductOptionValues = ({
 
   const handleRemoveValue = (removedValue: string) => {
     setValues(values.filter((v) => v !== removedValue));
+     if (onRemoveValue) {
+    onRemoveValue(values);
+  }
   };
-  // if (onRemoveValue) {
-  //   onRemoveValue(values);
-  // }
 
   useEffect(() => {
- 
-    console.log("t");
-    
     setValues(initialValues);
   }, [initialValues]);
 

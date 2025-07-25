@@ -14,8 +14,8 @@ import { DropdownOption } from "@/ui/components/Dropdown";
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState(true);
 
-  const handleRemoveValue = (selectedOption:DropdownOption) => {
-    console.log(selectedOption);
+  const handleRemoveValue = (values:string[]) => {
+    console.log(values);
   };
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
@@ -62,13 +62,17 @@ const Page = () => {
             </div>
             <ToggleButton label="Add tax for this product" />
           </div> */}
+      {/* <ProductOptionValues
+        initialValues={["red", "blue", "green"]}
+        onRemoveValue={handleRemoveValue}
+      /> */}
       <ProductOptionSelector
         initialOption={   { label: "color", value: ["red", "blue", "green"] }}
         initialOptions={[
           { label: "color", value: ["red", "blue", "green"] },
           { label: "size", value: ["small", "medium", "large"] },
         ]}
-        onRemoveValue={handleRemoveValue}
+        onRemoveValue={() => {}}
       />
       {/* <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900">

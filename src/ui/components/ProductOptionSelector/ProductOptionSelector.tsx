@@ -20,7 +20,7 @@ const ProductOptionSelector = ({
   const handleRemoveValue = (values: string[]) => {
     console.log(values);
     
-    setSelectedOption({ ...selectedOption, value: values });
+    // setSelectedOption({ ...selectedOption, value: values });
     // if (selectedOption.value.length > 0) {
     //   setSelectedOption((prev) => {
     //     if (!prev) return prev;
