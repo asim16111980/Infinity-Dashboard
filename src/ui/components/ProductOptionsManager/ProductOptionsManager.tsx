@@ -6,9 +6,14 @@ import ProductOptionSelector, { OptionValues } from "../ProductOptionSelector";
 import { ProductOptionsManagerProps } from "./productOptionsManager.type";
 import { DropdownOption } from "../Dropdown";
 
-const ProductOptionsManager = ({ options }: ProductOptionsManagerProps) => {
+const ProductOptionsManager = ({
+  options,
+  initialOptionIndex,
+}: ProductOptionsManagerProps) => {
   const [optionCount, setOptionCount] = useState<number>(1);
-  const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([
+    options[initialOptionIndex],
+  ]);
 
   const handleRemoveValue = (currentOption: DropdownOption) => {
     const isExit = selectedOptions.some(
@@ -34,12 +39,18 @@ const ProductOptionsManager = ({ options }: ProductOptionsManagerProps) => {
   };
 
   const addNewOptionSelector = () => {
-    const nextOption: DropdownOption|undefined = options.find(
-      (option) => !selectedOptions.some((ov) => ov.label === option.label)
+    const lastOptionIndex = selectedOptions.length - 1;
+    setSelectedOptions((prev) => [
+      ...prev,
+      { ...options[lastOptionIndex], disabled: true },
+    ]);
+
+    const nextOption: DropdownOption | undefined = options.find(
+      (option) => !option.disabled
     );
 
     if (nextOption) {
-      // setOptionsValues((prev) => [...prev, nextOption]);
+      setSelectedOptions((prev) => [...prev, nextOption]);
       setOptionCount((prev) => prev + 1);
     }
   };
@@ -56,15 +67,21 @@ const ProductOptionsManager = ({ options }: ProductOptionsManagerProps) => {
 
   return (
     <div className="w-full flex flex-col items-start gap-4">
-      {optionCount > 0 && (
-      <ProductOptionSelector
-        label={`Option ${optionCount}`}
-        initialOption={options[0]}
-        options={options}
-        onChangeOption={handleRemoveValue}
+      {optionCount > 0 &&
+        selectedOptions.map((_, index) => (
+          <ProductOptionSelector
+            key={index}
+            label={`Option ${index + 1}`}
+            initialOption={selectedOptions[index]}
+            options={options}
+            onChangeOption={handleRemoveValue}
+          />
+        ))}
+      <RegularButton
+        title="add more"
+        onClick={addNewOptionSelector}
+        className="text-blue-600"
       />
-      )} 
-      <RegularButton title="add more" onClick={addNewOptionSelector} className="text-blue-600" />
     </div>
   );
 };

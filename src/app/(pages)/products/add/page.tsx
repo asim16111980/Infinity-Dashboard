@@ -14,7 +14,7 @@ import { DropdownOption } from "@/ui/components/Dropdown";
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState(true);
 
-  const handleRemoveValue = (values:string[]) => {
+  const handleRemoveValue = (values: string[]) => {
     console.log(values);
   };
   return (
@@ -74,13 +74,14 @@ const Page = () => {
         ]}
         onChangeOption={() => {}}
       /> */}
-       <ProductOptionsManager
-                options={[
-                  { label: "color", value: ["red", "blue", "green"] },
-                  { label: "size", value: ["small", "medium", "large"] },
-                ]}
-              />
-            {/* ) */}
+      <ProductOptionsManager
+        options={[
+          { label: "color", value: ["red", "blue", "green"] },
+          { label: "size", value: ["small", "medium", "large"] },
+        ]}
+        initialOptionIndex={0}
+      />
+      {/* ) */}
       {/* <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900">
               Different Options
