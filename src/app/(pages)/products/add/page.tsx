@@ -66,14 +66,21 @@ const Page = () => {
         initialValues={["red", "blue", "green"]}
         onRemoveValue={handleRemoveValue}
       /> */}
-      <ProductOptionSelector
+      {/* <ProductOptionSelector
         initialOption={   { label: "color", value: ["red", "blue", "green"] }}
-        initialOptions={[
+        options={[
           { label: "color", value: ["red", "blue", "green"] },
           { label: "size", value: ["small", "medium", "large"] },
         ]}
-        onRemoveValue={() => {}}
-      />
+        onChangeOption={() => {}}
+      /> */}
+       <ProductOptionsManager
+                options={[
+                  { label: "color", value: ["red", "blue", "green"] },
+                  { label: "size", value: ["small", "medium", "large"] },
+                ]}
+              />
+            {/* ) */}
       {/* <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900">
               Different Options

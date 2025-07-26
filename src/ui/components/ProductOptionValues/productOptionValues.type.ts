@@ -2,7 +2,7 @@ import { DropdownOption } from "../Dropdown";
 
 export interface ProductOptionValuesProps {
   label?: string;
-  initialValues: string[];
+  values: string[];
   className?: string;
-  onRemoveValue?: (values: string[]) => void;
+  onRemoveValue?: (value: string) => void;
 }

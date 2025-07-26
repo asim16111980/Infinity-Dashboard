@@ -8,7 +8,7 @@ import clsx from "clsx";
 const Dropdown = ({
   label,
   title,
-  initialOption,
+  currentOption,
   options,
   className,
   onChange,
@@ -16,7 +16,7 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<
     DropdownOption | undefined
-  >(initialOption);
+  >(currentOption);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSelectOption = (option: DropdownOption) => {
@@ -43,6 +43,10 @@ const Dropdown = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    setSelectedOption(currentOption);
+  }, [currentOption]);
 
   return (
     <div className="flex flex-col gap-1 select-none">

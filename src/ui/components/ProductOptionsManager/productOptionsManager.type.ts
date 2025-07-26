@@ -1,5 +1,5 @@
-import { OptionValues } from "../ProductOptionSelector";
+import { DropdownOption } from "../Dropdown";
 
 export interface ProductOptionsManagerProps {
-  initialOptions: OptionValues[];
+ options: DropdownOption[];
 }

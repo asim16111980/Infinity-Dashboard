@@ -6,7 +6,7 @@ export type DropdownOption = {
 export interface DropdownProps {
   label?: string;
   title?: string;
-  initialOption?: DropdownOption;
+  currentOption?: DropdownOption;
   options: DropdownOption[];
   className?: string;
   onChange?: (option:DropdownOption) => void;

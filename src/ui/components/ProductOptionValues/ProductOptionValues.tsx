@@ -7,22 +7,20 @@ import clsx from "clsx";
 
 const ProductOptionValues = ({
   label,
-  initialValues,
+  values,
   className,
   onRemoveValue,
 }: ProductOptionValuesProps) => {
-  const [values, setValues] = useState<string[]>(initialValues);
+  // const [values, setValues] = useState<string[]>(values);
 
   const handleRemoveValue = (removedValue: string) => {
-    setValues(values.filter((v) => v !== removedValue));
-     if (onRemoveValue) {
-    onRemoveValue(values);
-  }
+    // setValues(values.filter((v) => v !== removedValue));
+    if (onRemoveValue) {
+      onRemoveValue(removedValue);
+    }
   };
 
-  useEffect(() => {
-    setValues(initialValues);
-  }, [initialValues]);
+  // useEffect(() => {}, [values]);
 
   return (
     <div
@@ -39,11 +37,13 @@ const ProductOptionValues = ({
             className="w-fit h-6 flex items-center justify-center gap-1 p-2 bg-slate-200 rounded"
           >
             <span>{value}</span>
-            <IconButton
-              iconName="x"
-              onClick={() => handleRemoveValue(value)}
-              className="size-6 text-slate-400 p-0.5"
-            />
+            {onRemoveValue && (
+              <IconButton
+                iconName="x"
+                onClick={() => handleRemoveValue(value)}
+                className="size-6 text-slate-400 p-0.5"
+              />
+            )}
           </span>
         ))}
       </div>
