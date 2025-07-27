@@ -5,6 +5,7 @@ import ProductOptionValues from "../ProductOptionValues";
 import { DropdownOption } from "../Dropdown";
 
 const ProductOptionSelector = ({
+  id,
   label,
   initialOption,
   options,
@@ -61,7 +62,7 @@ const ProductOptionSelector = ({
       }
     }
 
-    onChangeOption?.(currentOption);
+    onChangeOption?.(id,currentOption);
   }, [currentOption]);
 
   return (
