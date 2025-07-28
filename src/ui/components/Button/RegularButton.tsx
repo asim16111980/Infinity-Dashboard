@@ -20,6 +20,9 @@ const RegularButton = ({
 }: React.PropsWithChildren<ButtonProps>) => {
   const classes = clsx(
     "flex items-center justify-center rounded select-none",
+    {
+      "opacity-40 cursor-not-allowed pointer-events-none": props.disabled,
+    },
     className || [
       "gap-2 px-6 py-2",
       {

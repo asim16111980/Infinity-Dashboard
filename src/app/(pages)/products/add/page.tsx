@@ -6,17 +6,38 @@ import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductOptionValues from "@/ui/components/ProductOptionValues";
 import ProductOptionSelector from "@/ui/components/ProductOptionSelector/ProductOptionSelector";
 import { DropdownOption } from "@/ui/components/Dropdown";
 
 const Page = () => {
-  const [hasMultipleOptions, setHasMultipleOptions] = useState(true);
+  const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
+  const [options, setOptions] = useState<DropdownOption[]>([
+    { label: "color", value: ["red", "blue", "green"], disabled: false },
+    {
+      label: "size",
+      value: ["small", "medium", "large"],
+      disabled: false,
+    },
+  ]);
+  const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([]);
 
-  const handleRemoveValue = (values: string[]) => {
-    console.log(values);
+  const handleChangeOptions = (selectedOptions: DropdownOption[]) => {
+    setSelectedOptions(selectedOptions);
+
+    setOptions(
+      options.map((option) =>
+        selectedOptions.includes(option)
+          ? { ...option, disabled: true }
+          : option
+      )
+    );
   };
+  useEffect(() => {
+    console.log(selectedOptions);
+    console.log(options);
+  }, [selectedOptions]);
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       {/* <PageHeader
@@ -75,11 +96,9 @@ const Page = () => {
         onChangeOption={() => {}}
       /> */}
       <ProductOptionsManager
-        options={[
-          { label: "color", value: ["red", "blue", "green"] },
-          { label: "size", value: ["small", "medium", "large"] },
-        ]}
+        options={options}
         initialOptionIndex={0}
+        onChangeOptions={handleChangeOptions}
       />
       {/* ) */}
       {/* <div className="flex flex-col gap-4 py-6">

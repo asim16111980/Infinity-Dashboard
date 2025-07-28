@@ -9,6 +9,7 @@ import { DropdownOption } from "../Dropdown";
 const ProductOptionsManager = ({
   options,
   initialOptionIndex,
+  onChangeOptions,
 }: ProductOptionsManagerProps) => {
   // const [optionCount, setOptionCount] = useState<number>(1);
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([
@@ -16,12 +17,6 @@ const ProductOptionsManager = ({
   ]);
 
   const handleChangeOption = (id: number, currentOption: DropdownOption) => {
-    // const isExit = selectedOptions.some(
-    //   (option) => option.label === currentOption.label
-    // );
-    // if (isExit) {
-    console.log(id, currentOption);
-
     setSelectedOptions((prev) =>
       prev.map((option, index) => (index === id ? currentOption : option))
     );
@@ -45,26 +40,10 @@ const ProductOptionsManager = ({
   };
 
   const addNewOptionSelector = () => {
-    setSelectedOptions(
-      selectedOptions.map((option, index) =>
-        index === selectedOptions.length - 1
-          ? { ...option, disabled: true }
-          :option
-      )
-    );
-    
-    const nextOptionIndex =
-      options.findIndex(
-        (option) =>
-          option.label === selectedOptions[selectedOptions.length - 1].label &&
-          !option.disabled
-      ) + 1;
+    const nextOption = options.find((option) => !option.disabled);
 
-    if (nextOptionIndex < options.length) { 
-      setSelectedOptions([...selectedOptions, { ...options[nextOptionIndex] }]);
-    } else {
-      const nextOption = options.find((option) => !option.disabled);
-      if (nextOption) setSelectedOptions([...selectedOptions, nextOption]);
+    if (nextOption) {
+      setSelectedOptions([...selectedOptions, nextOption]);
     }
     // const lastOptionIndex = selectedOptions.length - 1;
     // setSelectedOptions((prev) => [
@@ -83,6 +62,7 @@ const ProductOptionsManager = ({
   };
 
   useEffect(() => {
+    onChangeOptions?.(selectedOptions);
     console.log(selectedOptions);
   }, [selectedOptions]);
   // useEffect(() => {
@@ -107,6 +87,7 @@ const ProductOptionsManager = ({
       <RegularButton
         title="add more"
         onClick={addNewOptionSelector}
+        disabled={selectedOptions === options}
         className="text-blue-600"
       />
     </div>
