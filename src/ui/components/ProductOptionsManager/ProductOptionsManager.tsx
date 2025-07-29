@@ -12,26 +12,23 @@ const ProductOptionsManager = ({
   onChangeOptions,
 }: ProductOptionsManagerProps) => {
   // const [optionCount, setOptionCount] = useState<number>(1);
-
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([
     options[initialOptionIndex],
   ]);
 
   const handleChangeOption = (id: number, currentOption: DropdownOption) => {
-    console.log(id,currentOption);
-    
+    console.log(currentOption);
     setSelectedOptions((prev) =>
-      prev.filter((option, index) => {
+    prev
+      .map((option, index) => {
         if (index === id) {
-          if (currentOption.value.length !== 0) {
-            console.log(currentOption);
-            return currentOption;
-          }
-        } else {
-          return option;
+          return currentOption.value.length !== 0 ? currentOption : null;
         }
+        return option;
       })
-    );
+      .filter((option): option is DropdownOption => option !== null)
+  );
+  
 
     // if (currentOption.value.length > 0) {
     //   setSelectedOptions((prev) =>
@@ -72,9 +69,9 @@ const ProductOptionsManager = ({
     //   // setOptionCount((prev) => prev + 1);
     // }
   };
-
+  console.log(options);
   useEffect(() => {
-    console.log(selectedOptions);
+    console.log(options);
     onChangeOptions?.(selectedOptions);
   }, [selectedOptions]);
   // useEffect(() => {

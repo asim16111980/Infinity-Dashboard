@@ -24,16 +24,24 @@ const Page = () => {
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([]);
 
   const handleChangeOptions = (selectedOptions: DropdownOption[]) => {
+    
     setSelectedOptions(selectedOptions);
 
     setOptions(
       options.map((option) =>
-        selectedOptions.includes(option)
+        selectedOptions.some(
+          (selected) => selected.label === option.label
+        )
           ? { ...option, disabled: true }
-          : option
+          : { ...option, disabled: false }
       )
     );
+    
+      console.log(selectedOptions);
+      console.log(options);
   };
+  
+
   useEffect(() => {
     console.log(selectedOptions);
     console.log(options);

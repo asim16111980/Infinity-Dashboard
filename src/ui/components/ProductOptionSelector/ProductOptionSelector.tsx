@@ -11,12 +11,13 @@ const ProductOptionSelector = ({
   options,
   onChangeOption,
 }: ProductOptionSelectorProps) => {
-  const [currentOption, setCurrentOption] =
-    useState<DropdownOption>(initialOption||null);
+  const [currentOption, setCurrentOption] = useState<DropdownOption>(
+    initialOption || null
+  );
 
   const handleChangeOption = (selectedOption: DropdownOption) => {
     console.log(selectedOption);
-    
+
     setCurrentOption(selectedOption);
   };
 
@@ -52,10 +53,11 @@ const ProductOptionSelector = ({
   // };
 
   useEffect(() => {
+  
     if (currentOption.value.length === 0) {
-      const nextOption = options.find((option) => !option.disabled)
-      if (nextOption)  setCurrentOption(nextOption);
-        
+      const nextOption = options.find((option) => !option.disabled);
+      if (nextOption) setCurrentOption(nextOption);
+      // console.log(nextOption, currentOption);
 
       // const currentOptionIndex = options.findIndex(
       //   (option) => option.label === currentOption.label
@@ -66,9 +68,9 @@ const ProductOptionSelector = ({
       // } else {
       //   setCurrentOption(options[0]);
       // }
+      console.log(currentOption);
     }
-       onChangeOption?.(id, currentOption);
-   
+    onChangeOption?.(id, currentOption);
   }, [currentOption]);
 
   return (
