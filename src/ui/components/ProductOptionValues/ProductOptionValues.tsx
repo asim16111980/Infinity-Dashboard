@@ -11,16 +11,11 @@ const ProductOptionValues = ({
   className,
   onRemoveValue,
 }: ProductOptionValuesProps) => {
-  // const [values, setValues] = useState<string[]>(values);
-
   const handleRemoveValue = (removedValue: string) => {
-    // setValues(values.filter((v) => v !== removedValue));
     if (onRemoveValue) {
       onRemoveValue(removedValue);
     }
   };
-
-  // useEffect(() => {}, [values]);
 
   return (
     <div

@@ -16,8 +16,6 @@ const ProductOptionSelector = ({
   );
 
   const handleChangeOption = (selectedOption: DropdownOption) => {
-    console.log(selectedOption);
-
     setCurrentOption(selectedOption);
   };
 
@@ -28,47 +26,10 @@ const ProductOptionSelector = ({
     }));
   };
 
-  // const handleRemoveValue = (value: string) => {
-  //   console.log(value);
-
-  // setSelectedOption({ ...selectedOption, value: values });
-  // if (selectedOption.value.length > 0) {
-  //   setSelectedOption((prev) => {
-  //     if (!prev) return prev;
-  //     const newValues = prev.value.filter((v) => v !== value);
-  //     return {
-  //       ...prev,
-  //       value: newValues,
-  //     };
-  //   });
-  // } else {
-  //   setSelectedOption((prev) => {
-  //     if (!prev) return prev;
-  //     return {
-  //       ...prev,
-  //       disabled: false,
-  //     };
-  //   });
-  // }
-  // };
-
   useEffect(() => {
-  
     if (currentOption.value.length === 0) {
       const nextOption = options.find((option) => !option.disabled);
       if (nextOption) setCurrentOption(nextOption);
-      // console.log(nextOption, currentOption);
-
-      // const currentOptionIndex = options.findIndex(
-      //   (option) => option.label === currentOption.label
-      // );
-
-      // if (currentOptionIndex < options.length - 1) {
-      //   setCurrentOption(options[currentOptionIndex + 1]);
-      // } else {
-      //   setCurrentOption(options[0]);
-      // }
-      console.log(currentOption);
     }
     onChangeOption?.(id, currentOption);
   }, [currentOption]);
