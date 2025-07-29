@@ -12,13 +12,25 @@ const ProductOptionsManager = ({
   onChangeOptions,
 }: ProductOptionsManagerProps) => {
   // const [optionCount, setOptionCount] = useState<number>(1);
+
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([
     options[initialOptionIndex],
   ]);
 
   const handleChangeOption = (id: number, currentOption: DropdownOption) => {
+    console.log(id,currentOption);
+    
     setSelectedOptions((prev) =>
-      prev.map((option, index) => (index === id ? currentOption : option))
+      prev.filter((option, index) => {
+        if (index === id) {
+          if (currentOption.value.length !== 0) {
+            console.log(currentOption);
+            return currentOption;
+          }
+        } else {
+          return option;
+        }
+      })
     );
 
     // if (currentOption.value.length > 0) {
@@ -62,8 +74,8 @@ const ProductOptionsManager = ({
   };
 
   useEffect(() => {
-    onChangeOptions?.(selectedOptions);
     console.log(selectedOptions);
+    onChangeOptions?.(selectedOptions);
   }, [selectedOptions]);
   // useEffect(() => {
   //   setOptionCount(0);
@@ -87,7 +99,7 @@ const ProductOptionsManager = ({
       <RegularButton
         title="add more"
         onClick={addNewOptionSelector}
-        disabled={selectedOptions === options}
+        disabled={selectedOptions.length === options.length}
         className="text-blue-600"
       />
     </div>
