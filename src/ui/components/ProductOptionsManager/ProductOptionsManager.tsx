@@ -16,11 +16,13 @@ const ProductOptionsManager = ({
   ]);
 
   const handleChangeOption = (id: number, currentOption: DropdownOption) => {
+    console.log(`Current option changed for ${id}:`, currentOption);
+    
     setSelectedOptions((prev) =>
       prev
         .map((option, index) => {
           if (index === id) {
-            return currentOption.value.length !== 0 ? currentOption : null;
+            return currentOption.value.length !== 0 ? currentOption : options.find((option) => !option.disabled);
           }
           return option;
         })
@@ -37,6 +39,7 @@ const ProductOptionsManager = ({
   };
 
   useEffect(() => {
+    console.log("Selected options changed:", selectedOptions);
     onChangeOptions?.(selectedOptions);
   }, [selectedOptions]);
 

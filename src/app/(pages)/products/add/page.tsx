@@ -36,15 +36,11 @@ const Page = () => {
           : { ...option, disabled: false }
       )
     );
-    
-      console.log(selectedOptions);
-      console.log(options);
   };
-  
 
   useEffect(() => {
-    console.log(selectedOptions);
-    console.log(options);
+    console.log("Selected options changed:", selectedOptions);
+    console.log(" options changed:", options);
   }, [selectedOptions]);
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">

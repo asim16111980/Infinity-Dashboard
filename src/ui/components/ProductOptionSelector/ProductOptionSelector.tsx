@@ -20,6 +20,8 @@ const ProductOptionSelector = ({
   };
 
   const handleRemoveValue = (valueToRemove: string) => {
+    console.log(`Removing value: ${valueToRemove}`);
+    console.log(`Removing value: ${valueToRemove}`);
     setCurrentOption((prev) => ({
       ...prev,
       value: prev.value.filter((v) => v !== valueToRemove),
@@ -27,8 +29,13 @@ const ProductOptionSelector = ({
   };
 
   useEffect(() => {
+  console.log(`Current option changed for ${id}:`, currentOption);
+  
     if (currentOption.value.length === 0) {
+      console.log(`No values selected for option ${id}, finding next available option.`);
       const nextOption = options.find((option) => !option.disabled);
+      console.log(`Next available option for ${id}:`, nextOption);
+      
       if (nextOption) setCurrentOption(nextOption);
     }
     onChangeOption?.(id, currentOption);
