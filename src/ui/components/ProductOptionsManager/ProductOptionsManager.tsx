@@ -7,27 +7,51 @@ import { ProductOptionsManagerProps } from "./productOptionsManager.type";
 import { DropdownOption } from "../Dropdown";
 
 const ProductOptionsManager = ({
-  options,
+  initialOptions,
   initialOptionIndex,
   onChangeOptions,
 }: ProductOptionsManagerProps) => {
+  const [options, setOptions] = useState<DropdownOption[]>(initialOptions);
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([
     options[initialOptionIndex],
   ]);
 
   const handleChangeOption = (id: number, currentOption: DropdownOption) => {
     console.log(`Current option changed for ${id}:`, currentOption);
-    
-    setSelectedOptions((prev) =>
-      prev
-        .map((option, index) => {
-          if (index === id) {
-            return currentOption.value.length !== 0 ? currentOption : options.find((option) => !option.disabled);
-          }
-          return option;
+
+    // setSelectedOptions(selectedOptions);
+    if (currentOption.value.length !== 0) {
+      setSelectedOptions((prev) =>
+        prev.map((option, index) => {
+          return index === id ? currentOption : option;
         })
-        .filter((option): option is DropdownOption => option !== null)
-    );
+      );
+    } else {
+      if (options.length === selectedOptions.length) {
+        setSelectedOptions((prev) =>
+          prev.filter((selected) => selected.value.length !== 0)
+        );
+      } else {
+        setSelectedOptions((prev) =>
+          prev
+            .map((selected, index) =>
+              id !== index
+                ? selected
+                : options.find((option) => !option.disabled)
+            )
+            .filter((option): option is DropdownOption => option !== null)
+        );
+      }
+    }
+
+    //     return currentOption.value.length !== 0
+
+    //       : options.find((option) => !option.disabled);
+    //   }
+
+    // })
+    // .filter((option): option is DropdownOption => option !== null)
+    // );
   };
 
   const addNewOptionSelector = () => {
@@ -40,6 +64,13 @@ const ProductOptionsManager = ({
 
   useEffect(() => {
     console.log("Selected options changed:", selectedOptions);
+    setOptions(
+      options.map((option) =>
+        selectedOptions.some((selected) => option.label === selected.label)
+          ? { ...option, disabled: true }
+          : { ...option, disabled: false }
+      )
+    );
     onChangeOptions?.(selectedOptions);
   }, [selectedOptions]);
 

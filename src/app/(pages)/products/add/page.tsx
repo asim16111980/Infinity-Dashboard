@@ -25,17 +25,17 @@ const Page = () => {
 
   const handleChangeOptions = (selectedOptions: DropdownOption[]) => {
     
-    setSelectedOptions(selectedOptions);
+    // setSelectedOptions(selectedOptions);
 
-    setOptions(
-      options.map((option) =>
-        selectedOptions.some(
-          (selected) => selected.label === option.label
-        )
-          ? { ...option, disabled: true }
-          : { ...option, disabled: false }
-      )
-    );
+    // setOptions(
+    //   options.map((option) =>
+    //     selectedOptions.some(
+    //       (selected) => selected.label === option.label
+    //     )
+    //       ? { ...option, disabled: true }
+    //       : { ...option, disabled: false }
+    //   )
+    // );
   };
 
   useEffect(() => {
@@ -100,7 +100,7 @@ const Page = () => {
         onChangeOption={() => {}}
       /> */}
       <ProductOptionsManager
-        options={options}
+        initialOptions={options}
         initialOptionIndex={0}
         onChangeOptions={handleChangeOptions}
       />
