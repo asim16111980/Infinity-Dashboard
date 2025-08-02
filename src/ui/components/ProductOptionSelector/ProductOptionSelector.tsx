@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+"use client";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
 import ProductOptionValues from "../ProductOptionValues";
@@ -15,34 +16,33 @@ const ProductOptionSelector = ({
     initialOption || null
   );
 
-  const handleChangeOption = (selectedOption: DropdownOption) => {
-    setCurrentOption(selectedOption);
-  };
+  const nextAvailableOption = useMemo(() => {
+    return options.find((option) => !option.disabled);
+  }, [options]);
 
-  const handleRemoveValue = (valueToRemove: string) => {
-    console.log(`Removing value: ${valueToRemove}`);
-    console.log(`Removing value: ${valueToRemove}`);
+  const handleChangeOption = useCallback((selectedOption: DropdownOption) => {
+    setCurrentOption(selectedOption);
+  }, []);
+  
+  const handleRemoveValue = useCallback((valueToRemove: string) => {
     setCurrentOption((prev) => ({
       ...prev,
       value: prev.value.filter((v) => v !== valueToRemove),
     }));
-  };
+  }, []);  
 
+
+  
   useEffect(() => {
-    console.log(`Current option changed for ${id}:`, currentOption);
-
     if (currentOption.value.length === 0) {
-      console.log(
-        `No values selected for option ${id}, finding next available option.`
-      );
-      const nextOption = options.find((option) => !option.disabled);
-      console.log(`Next available option for ${id}:`, nextOption);
-
-      if (nextOption) setCurrentOption(nextOption);
+      nextAvailableOption
     }
-    onChangeOption?.(id, currentOption);
   }, [currentOption]);
 
+  useEffect(() => {
+    onChangeOption?.(id, currentOption);
+  }, [currentOption]);
+  
   useEffect(() => {
     if (initialOption) {
       setCurrentOption(initialOption);

@@ -1,50 +1,24 @@
 "use client";
-
 import TextInput from "@/ui/components/TextInput/TextInput";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
-import { useEffect, useState } from "react";
-import ProductOptionValues from "@/ui/components/ProductOptionValues";
-import ProductOptionSelector from "@/ui/components/ProductOptionSelector/ProductOptionSelector";
+import { useState } from "react";
 import { DropdownOption } from "@/ui/components/Dropdown";
 
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
-  const [options, setOptions] = useState<DropdownOption[]>([
-    { label: "color", value: ["red", "blue", "green"], disabled: false },
-    {
-      label: "size",
-      value: ["small", "medium", "large"],
-      disabled: false,
-    },
-  ]);
   const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([]);
 
   const handleChangeOptions = (selectedOptions: DropdownOption[]) => {
-    
-    // setSelectedOptions(selectedOptions);
-
-    // setOptions(
-    //   options.map((option) =>
-    //     selectedOptions.some(
-    //       (selected) => selected.label === option.label
-    //     )
-    //       ? { ...option, disabled: true }
-    //       : { ...option, disabled: false }
-    //   )
-    // );
+    setSelectedOptions(selectedOptions);
   };
 
-  useEffect(() => {
-    console.log("Selected options changed:", selectedOptions);
-    console.log(" options changed:", options);
-  }, [selectedOptions]);
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
-      {/* <PageHeader
+      <PageHeader
         title="add product"
         regularButtons={[
           {
@@ -86,26 +60,9 @@ const Page = () => {
               />
             </div>
             <ToggleButton label="Add tax for this product" />
-          </div> */}
-      {/* <ProductOptionValues
-        initialValues={["red", "blue", "green"]}
-        onRemoveValue={handleRemoveValue}
-      /> */}
-      {/* <ProductOptionSelector
-        initialOption={   { label: "color", value: ["red", "blue", "green"] }}
-        options={[
-          { label: "color", value: ["red", "blue", "green"] },
-          { label: "size", value: ["small", "medium", "large"] },
-        ]}
-        onChangeOption={() => {}}
-      /> */}
-      <ProductOptionsManager
-        initialOptions={options}
-        initialOptionIndex={0}
-        onChangeOptions={handleChangeOptions}
-      />
-      {/* ) */}
-      {/* <div className="flex flex-col gap-4 py-6">
+          </div>
+
+          <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900">
               Different Options
             </h3>
@@ -117,15 +74,25 @@ const Page = () => {
             {hasMultipleOptions && (
               <ProductOptionsManager
                 initialOptions={[
-                  { label: "color", value: ["red", "blue", "green"] },
-                  { label: "size", value: ["small", "medium", "large"] },
+                  {
+                    label: "color",
+                    value: ["red", "blue", "green"],
+                    disabled: false,
+                  },
+                  {
+                    label: "size",
+                    value: ["small", "medium", "large"],
+                    disabled: false,
+                  },
                 ]}
+                initialOptionIndex={0}
+                onChangeOptions={handleChangeOptions}
               />
             )}
           </div>
         </div>
         <div className="w-96"></div>
-      </div> */}
+      </div>
     </section>
   );
 };
