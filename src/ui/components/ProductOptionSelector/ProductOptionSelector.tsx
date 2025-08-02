@@ -29,17 +29,25 @@ const ProductOptionSelector = ({
   };
 
   useEffect(() => {
-  console.log(`Current option changed for ${id}:`, currentOption);
-  
+    console.log(`Current option changed for ${id}:`, currentOption);
+
     if (currentOption.value.length === 0) {
-      console.log(`No values selected for option ${id}, finding next available option.`);
+      console.log(
+        `No values selected for option ${id}, finding next available option.`
+      );
       const nextOption = options.find((option) => !option.disabled);
       console.log(`Next available option for ${id}:`, nextOption);
-      
+
       if (nextOption) setCurrentOption(nextOption);
     }
     onChangeOption?.(id, currentOption);
   }, [currentOption]);
+
+  useEffect(() => {
+    if (initialOption) {
+      setCurrentOption(initialOption);
+    }
+  }, [initialOption]);
 
   return (
     <div className="flex flex-col gap-4">

@@ -28,9 +28,11 @@ const ProductOptionsManager = ({
       );
     } else {
       if (options.length === selectedOptions.length) {
-        setSelectedOptions((prev) =>
-          prev.filter((selected) => selected.value.length !== 0)
-        );
+        console.log("Removing option at index:", id);
+        const d = selectedOptions.filter((_, index) => id !== index);
+        console.log("Filtered options:", d);
+
+        setSelectedOptions((prev) => prev.filter((_, index) => id !== index));
       } else {
         setSelectedOptions((prev) =>
           prev

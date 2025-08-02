@@ -13,8 +13,6 @@ const ProductOptionValues = ({
 }: ProductOptionValuesProps) => {
   const handleRemoveValue = (removedValue: string) => {
     if (onRemoveValue) {
-      console.log(`Removing value: ${removedValue}`);
-      console.log(`Removing value: ${removedValue}`);
       onRemoveValue(removedValue);
     }
   };
