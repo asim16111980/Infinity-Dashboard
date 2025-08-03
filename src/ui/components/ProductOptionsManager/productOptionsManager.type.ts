@@ -1,7 +1,6 @@
-import { DropdownOption } from "../Dropdown";
-
+import { Option } from "../Dropdown";
 export interface ProductOptionsManagerProps {
-  initialOptions: DropdownOption[];
+  initialOptions: Option[];
   initialOptionIndex: number;
-  onChangeOptions: (selectedOptions: DropdownOption[]) => void;
+  onChangeOptions: (selectedOptions: Option[]) => void;
 }

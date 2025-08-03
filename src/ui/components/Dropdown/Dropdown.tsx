@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { DropdownOption, DropdownProps } from "./dropdown.type";
+import { DropdownOption, DropdownProps, Option } from "./dropdown.type";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
@@ -14,12 +14,12 @@ const Dropdown = ({
   onChange,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<
-    DropdownOption | undefined
-  >(currentOption);
+  const [selectedOption, setSelectedOption] = useState<Option | undefined>(
+    currentOption
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleSelectOption = (option: DropdownOption) => {
+  const handleSelectOption = (option: Option) => {
     setSelectedOption(option);
     setIsOpen(false);
 
@@ -66,7 +66,7 @@ const Dropdown = ({
           onClick={() => setIsOpen((val) => !val)}
         >
           <span className="capitalize text-base text-slate-400">
-            {selectedOption?.label || title}
+            {selectedOption?.option.label || title}
           </span>
           {
             <ChevronDown
@@ -89,16 +89,16 @@ const Dropdown = ({
             }
           )}
         >
-          {options.map((option, index) => (
+          {options.map((opt) => (
             <li
-              key={index}
-              onClick={() => handleSelectOption(option)}
+              key={opt.id}
+              onClick={() => handleSelectOption(opt)}
               className={clsx("px-4 py-2 hover:bg-slate-100 cursor-pointer", {
                 "opacity-40 cursor-not-allowed pointer-events-none":
-                  option.disabled,
+                  opt.option.disabled,
               })}
             >
-              {option.label}
+              {opt.option.label}
             </li>
           ))}
         </ul>

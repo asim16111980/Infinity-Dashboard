@@ -6,13 +6,13 @@ import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
-import { DropdownOption } from "@/ui/components/Dropdown";
+import { Option } from "@/ui/components/Dropdown";
 
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
-  const [selectedOptions, setSelectedOptions] = useState<DropdownOption[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
-  const handleChangeOptions = (selectedOptions: DropdownOption[]) => {
+  const handleChangeOptions = (selectedOptions: Option[]) => {
     setSelectedOptions(selectedOptions);
   };
 
@@ -75,14 +75,20 @@ const Page = () => {
               <ProductOptionsManager
                 initialOptions={[
                   {
-                    label: "color",
-                    value: ["red", "blue", "green"],
-                    disabled: false,
+                    id: 0,
+                    option: {
+                      label: "color",
+                      value: ["red", "blue", "green"],
+                      disabled: false,
+                    },
                   },
                   {
-                    label: "size",
-                    value: ["small", "medium", "large"],
-                    disabled: false,
+                    id: 1,
+                    option: {
+                      label: "size",
+                      value: ["small", "medium", "large"],
+                      disabled: false,
+                    },
                   },
                 ]}
                 initialOptionIndex={0}

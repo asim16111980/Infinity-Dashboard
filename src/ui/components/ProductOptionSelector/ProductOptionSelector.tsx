@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
 import ProductOptionValues from "../ProductOptionValues";
-import { DropdownOption } from "../Dropdown";
+import { DropdownOption, Option } from "../Dropdown";
 
 const ProductOptionSelector = ({
   id,
@@ -12,37 +12,38 @@ const ProductOptionSelector = ({
   options,
   onChangeOption,
 }: ProductOptionSelectorProps) => {
-  const [currentOption, setCurrentOption] = useState<DropdownOption>(
+  const [currentOption, setCurrentOption] = useState<Option>(
     initialOption || null
   );
 
   const nextAvailableOption = useMemo(() => {
-    return options.find((option) => !option.disabled);
+    return options.find((opt) => !opt.option.disabled);
   }, [options]);
 
-  const handleChangeOption = useCallback((selectedOption: DropdownOption) => {
+  const handleChangeOption = useCallback((selectedOption: Option) => {
     setCurrentOption(selectedOption);
   }, []);
-  
+
   const handleRemoveValue = useCallback((valueToRemove: string) => {
     setCurrentOption((prev) => ({
       ...prev,
-      value: prev.value.filter((v) => v !== valueToRemove),
+      option: {
+        ...prev.option,
+        value: prev.option.value.filter((v) => v !== valueToRemove),
+      },
     }));
-  }, []);  
+  }, []);
 
-
-  
   useEffect(() => {
-    if (currentOption.value.length === 0) {
-      nextAvailableOption
+    if (currentOption.option.value.length === 0) {
+      nextAvailableOption;
     }
   }, [currentOption]);
 
   useEffect(() => {
-    onChangeOption?.(id, currentOption);
+    onChangeOption?.(currentOption);
   }, [currentOption]);
-  
+
   useEffect(() => {
     if (initialOption) {
       setCurrentOption(initialOption);
@@ -54,15 +55,15 @@ const ProductOptionSelector = ({
       <span className="text-base font-bold text-slate-900">{label}</span>
       <div className="flex items-center gap-6">
         <Dropdown
-          label={currentOption.label}
+          label={currentOption.option.label}
           currentOption={currentOption}
           options={options}
           onChange={handleChangeOption}
         />
-        {currentOption.value.length > 0 && (
+        {currentOption.option.value.length > 0 && (
           <ProductOptionValues
             label="Value"
-            values={currentOption.value}
+            values={currentOption.option.value}
             onRemoveValue={handleRemoveValue}
           />
         )}

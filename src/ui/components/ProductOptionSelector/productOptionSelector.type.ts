@@ -1,8 +1,9 @@
 import { DropdownOption } from "../Dropdown";
+import { Option } from "../Dropdown";
 export interface ProductOptionSelectorProps {
   id: number;
   label?: string;
-  initialOption: DropdownOption;
-  options: DropdownOption[];
-  onChangeOption: (id: number, option: DropdownOption) => void;
+  initialOption: Option;
+  options: Option[];
+  onChangeOption: (option: Option) => void;
 }
