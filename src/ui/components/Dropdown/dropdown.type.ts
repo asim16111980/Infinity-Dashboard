@@ -1,12 +1,8 @@
-export type DropdownOption = {
-  label: string;
-  value: string[];
-  disabled: boolean;
-};
-
 export type Option = {
   id: number;
-  option: DropdownOption;
+  label: string;
+  value: string[];
+  selected: boolean;
 };
 export interface DropdownProps {
   label?: string;

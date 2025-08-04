@@ -76,19 +76,15 @@ const Page = () => {
                 initialOptions={[
                   {
                     id: 0,
-                    option: {
-                      label: "color",
-                      value: ["red", "blue", "green"],
-                      disabled: false,
-                    },
+                    label: "color",
+                    value: ["red", "blue", "green"],
+                    disabled: false,
                   },
                   {
                     id: 1,
-                    option: {
-                      label: "size",
-                      value: ["small", "medium", "large"],
-                      disabled: false,
-                    },
+                    label: "size",
+                    value: ["small", "medium", "large"],
+                    disabled: false,
                   },
                 ]}
                 initialOptionIndex={0}

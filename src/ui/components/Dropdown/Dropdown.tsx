@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { DropdownOption, DropdownProps, Option } from "./dropdown.type";
+import { DropdownProps, Option } from "./dropdown.type";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
@@ -66,7 +66,7 @@ const Dropdown = ({
           onClick={() => setIsOpen((val) => !val)}
         >
           <span className="capitalize text-base text-slate-400">
-            {selectedOption?.option.label || title}
+            {selectedOption?.label || title}
           </span>
           {
             <ChevronDown
@@ -89,16 +89,16 @@ const Dropdown = ({
             }
           )}
         >
-          {options.map((opt) => (
+          {options.map((option) => (
             <li
-              key={opt.id}
-              onClick={() => handleSelectOption(opt)}
+              key={option.id}
+              onClick={() => handleSelectOption(option)}
               className={clsx("px-4 py-2 hover:bg-slate-100 cursor-pointer", {
                 "opacity-40 cursor-not-allowed pointer-events-none":
-                  opt.option.disabled,
+                  option.selected,
               })}
             >
-              {opt.option.label}
+              {option.label}
             </li>
           ))}
         </ul>
