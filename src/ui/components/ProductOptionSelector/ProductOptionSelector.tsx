@@ -27,9 +27,14 @@ const ProductOptionSelector = ({
   }, []);
 
   useEffect(() => {
-    // استدعاء onChangeOption عند تغير currentOption
-    onChangeOption?.(currentOption);
+    onChangeOption?.(id, currentOption);
   }, [currentOption]);
+
+  useEffect(() => {
+    if (initialOption) {
+      setCurrentOption(initialOption);
+    }
+  }, [initialOption]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -93,7 +98,6 @@ export default ProductOptionSelector;
 //       setCurrentOption(nextAvailableOption);
 //     }
 //   }, [currentOption, nextAvailableOption]);
-  
 
 //   useEffect(() => {
 //     onChangeOption?.(currentOption);

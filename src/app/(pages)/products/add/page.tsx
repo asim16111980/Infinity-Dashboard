@@ -78,13 +78,13 @@ const Page = () => {
                     id: 0,
                     label: "color",
                     value: ["red", "blue", "green"],
-                    disabled: false,
+                    selected: false,
                   },
                   {
                     id: 1,
                     label: "size",
                     value: ["small", "medium", "large"],
-                    disabled: false,
+                    selected: false,
                   },
                 ]}
                 initialOptionIndex={0}

@@ -5,5 +5,5 @@ export interface ProductOptionSelectorProps {
   label?: string;
   initialOption: Option;
   options: Option[];
-  onChangeOption: (option: Option) => void;
+  onChangeOption: (id: number, option: Option) => void;
 }

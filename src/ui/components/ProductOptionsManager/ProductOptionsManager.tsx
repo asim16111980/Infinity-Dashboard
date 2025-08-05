@@ -17,33 +17,33 @@ const ProductOptionsManager = ({
   const updatedOptions = useMemo(() => {
     return initialOptions.map((opt) =>
       selectedOptions.some((selected) => selected.id === opt.id)
-        ? { ...opt, disabled: true }
-        : { ...opt, disabled: false }
+        ? { ...opt, selected: true }
+        : { ...opt, selected: false }
     );
   }, [selectedOptions, initialOptions]);
 
   const nextAvailableOption = useMemo(() => {
-    return updatedOptions.find((option) => !option.disabled);
+    return updatedOptions.find((option) => !option.selected);
   }, [updatedOptions]);
 
   const handleChangeOption = useCallback(
-    (currentOption: Option) => {
+    (selectorId: number, currentOption: Option) => {
       if (currentOption.value.length > 0) {
         setSelectedOptions((prev) =>
-          prev.map((selected) =>
-            selected.id === currentOption.id ? currentOption : selected
+          prev.map((selected, index) =>
+            index === selectorId ? currentOption : selected
           )
         );
       } else {
         if (selectedOptions.length === initialOptions.length) {
           setSelectedOptions((prev) =>
-            prev.filter((option) => option.id !== currentOption.id)
+            prev.filter((_, index) => index !== selectorId)
           );
         } else {
           setSelectedOptions((prev) =>
             prev
-              .map((selected) =>
-                selected.id === currentOption.id && nextAvailableOption
+              .map((selected, index) =>
+                index === selectorId && nextAvailableOption
                   ? nextAvailableOption
                   : selected
               )
@@ -52,7 +52,7 @@ const ProductOptionsManager = ({
         }
       }
     },
-    [selectedOptions, nextAvailableOption, initialOptions.length]
+    [selectedOptions, nextAvailableOption]
   );
 
   const addNewOptionSelector = useCallback(() => {
@@ -67,10 +67,10 @@ const ProductOptionsManager = ({
 
   return (
     <div className="w-full flex flex-col items-start gap-4">
-      {selectedOptions.map((option,index) => (
+      {selectedOptions.map((option, index) => (
         <ProductOptionSelector
-          key={option.id}
-          id={option.id}
+          id={index}
+          key={index}
           label={`Option ${index + 1}`}
           initialOption={option}
           options={updatedOptions}
@@ -88,7 +88,6 @@ const ProductOptionsManager = ({
 };
 
 export default ProductOptionsManager;
-
 
 // "use client";
 // import { useCallback, useEffect, useMemo, useState } from "react";
@@ -111,7 +110,6 @@ export default ProductOptionsManager;
 //     return options.find((option) => !option.selected);
 //   }, [options]);
 
-  
 //   const updatedOptions = useMemo(() => {
 //     return options.map((option) =>
 //       selectedOptions.some((selected) => selected.id === option.id)
@@ -119,7 +117,7 @@ export default ProductOptionsManager;
 //         : { ...option, disabled: false }
 //     );
 //   }, [selectedOptions]);
-  
+
 //   const addNewOptionSelector = useCallback(() => {
 //     if (nextAvailableOption) {
 //       setSelectedOptions((prev) => [...prev, nextAvailableOption]);

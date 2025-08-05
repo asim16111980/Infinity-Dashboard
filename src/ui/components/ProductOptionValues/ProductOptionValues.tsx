@@ -1,5 +1,5 @@
 "use client";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 import IconButton from "../Button/IconButton";
 import { ProductOptionValuesProps } from "./productOptionValues.type";
 import clsx from "clsx";
@@ -14,7 +14,6 @@ const ProductOptionValues = memo(
       },
       [onRemoveValue]
     );
-
     return (
       <div
         className={clsx(
