@@ -6,14 +6,16 @@ import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import ToggleButton from "@/ui/components/Button/ToggleButton";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
-import { Option } from "@/ui/components/Dropdown";
+import { EssentialOption } from "@/ui/components/ProductOptionsManager";
 
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
-  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
+  const [essentialOptions, setEssentialOptions] = useState<EssentialOption[]>(
+    []
+  );
 
-  const handleChangeOptions = (selectedOptions: Option[]) => {
-    setSelectedOptions(selectedOptions);
+  const handleChangeOptions = (essentialOptions: EssentialOption[]) => {
+    setEssentialOptions(essentialOptions);
   };
 
   return (

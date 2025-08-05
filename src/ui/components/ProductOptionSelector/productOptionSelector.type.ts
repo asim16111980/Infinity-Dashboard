@@ -1,4 +1,3 @@
-import { DropdownOption } from "../Dropdown";
 import { Option } from "../Dropdown";
 export interface ProductOptionSelectorProps {
   id: number;
