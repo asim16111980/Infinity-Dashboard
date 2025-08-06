@@ -10,4 +10,5 @@ type SidebarLink = {
 export const SIDEBAR_LINKS: SidebarLink[] = [
   { href: "/", label: "dashboard", icon: "home" },
   { href: "/products", label: "products", icon: "tag", badgeCount: 16 },
+  { href: "/categories", label: "categories", icon: "folder" },
 ];

@@ -8,6 +8,7 @@ import {
   Home,
   Tag,
   X,
+  Folder,
 } from "lucide-react";
 
 export const ICONS_MAP = {
@@ -20,6 +21,7 @@ export const ICONS_MAP = {
   home: Home,
   tag: Tag,
   x: X,
+  folder: Folder,
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;

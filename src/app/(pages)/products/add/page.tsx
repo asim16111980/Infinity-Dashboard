@@ -13,6 +13,7 @@ import CheckBox from "@/ui/components/CheckBox/CheckBox";
 import { Tags } from "lucide-react";
 import Tag from "@/ui/components/Tag";
 import { TagProps } from "@/ui/components/Tag";
+import CustomLink from "@/ui/components/CustomLink";
 
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
@@ -144,10 +145,10 @@ const Page = () => {
                 </li>
               ))}
             </ul>
-            <RegularButton
-              title="Create New"
-              onClick={() => {}}
+            <CustomLink
+              href="/categories/create"
               className="w-fit text-blue-500 bg-transparent"
+              title="Create New"
             />
           </div>
           <div className="flex flex-col gap-4 bg-white rounded-md px-4 py-6 shadow">
