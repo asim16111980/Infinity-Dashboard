@@ -100,13 +100,21 @@ const Page = () => {
                   {
                     id: 0,
                     label: "color",
-                    value: ["red", "blue", "green"],
+                    value: [
+                      { id: 0, title: "red" },
+                      { id: 1, title: "blue" },
+                      { id: 2, title: "green" },
+                    ],
                     selected: false,
                   },
                   {
                     id: 1,
                     label: "size",
-                    value: ["small", "medium", "large"],
+                    value: [
+                      { id: 0, title: "small" },
+                      { id: 1, title: "medium" },
+                      { id: 2, title: "large" },
+                    ],
                     selected: false,
                   },
                 ]}
@@ -163,6 +171,13 @@ const Page = () => {
                 />
               ))}
             </ul>
+          </div>
+          <div className="flex flex-col gap-4 bg-white rounded-md px-4 py-6 shadow">
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              SEO Settings
+            </h3>
+            <TextInput label="Title" />
+            <Textarea label="Description" />
           </div>
         </div>
       </div>

@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { ProductOptionSelectorProps } from "./productOptionSelector.type";
 import Dropdown from "../Dropdown/Dropdown";
-import ProductOptionValues from "../ProductOptionValues";
 import { Option } from "../Dropdown";
+import Tag from "../Tag";
 
 const ProductOptionSelector = ({
   id,
@@ -19,10 +19,10 @@ const ProductOptionSelector = ({
     setCurrentOption(selectedOption);
   }, []);
 
-  const handleRemoveValue = useCallback((valueToRemove: string) => {
+  const handleRemoveValue = useCallback((removedValueID: number) => {
     setCurrentOption((prev) => ({
       ...prev,
-      value: prev.value.filter((v) => v !== valueToRemove),
+      value: prev.value.filter((v) => v.id !== removedValueID),
     }));
   }, []);
 
@@ -47,11 +47,19 @@ const ProductOptionSelector = ({
           onChange={handleChangeOption}
         />
         {currentOption.value.length > 0 && (
-          <ProductOptionValues
-            label="Value"
-            values={currentOption.value}
-            onRemoveValue={handleRemoveValue}
-          />
+          <div className="w-full flex flex-col gap-1 text-sm text-slate-600 bg-white capitalize select-none">
+            <span className="text-sm text-slate-600 capitalize">Value</span>
+            <div className="w-fit h-10 flex items-center gap-2 px-4 py-2 rounded border border-slate-200">
+              {currentOption.value.map((value) => (
+                <Tag
+                  key={value.id}
+                  id={value.id}
+                  title={value.title}
+                  onRemoveValue={handleRemoveValue}
+                />
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>

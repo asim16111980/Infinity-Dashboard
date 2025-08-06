@@ -4,13 +4,20 @@ import clsx from "clsx";
 import { TextInputProps } from "./textInput.type";
 import { useState } from "react";
 
-const TextInput = ({ label, placeholder, className, onKeyDown }: TextInputProps) => {
+const TextInput = ({
+  label,
+  placeholder,
+  className,
+  onKeyDown,
+}: TextInputProps) => {
   const [value, setValue] = useState("");
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onKeyDown && e.key === "Enter") {
-      onKeyDown?.(e.currentTarget.value)&& setValue(""); 
+      onKeyDown?.(e.currentTarget.value) && setValue("");
     }
   };
+
   return (
     <label className={clsx("flex flex-col gap-1 select-none", className)}>
       <span className="text-sm text-slate-600 capitalize">{label}</span>

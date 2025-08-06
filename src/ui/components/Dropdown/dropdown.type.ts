@@ -1,7 +1,12 @@
+export type Value = {
+  id: number;
+  title: string;
+};
+
 export type Option = {
   id: number;
   label: string;
-  value: string[];
+  value: Value[];
   selected: boolean;
 };
 export interface DropdownProps {
