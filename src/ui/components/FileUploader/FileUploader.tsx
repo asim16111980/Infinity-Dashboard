@@ -63,7 +63,7 @@ const FileUploader = () => {
             aria-label="Add files"
             iconClassName={selectedFiles.length > 0 ? "block" : "hidden"}
             className={clsx(
-              "text-blue-700 border border-slate-200 bg-white",
+              "text-blue-500 border border-slate-200 bg-white",
               selectedFiles.length > 0
                 ? "rounded-full bg-transparent p-4"
                 : "text-base px-6 py-2"

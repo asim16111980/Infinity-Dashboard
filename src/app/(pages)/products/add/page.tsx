@@ -7,16 +7,31 @@ import ToggleButton from "@/ui/components/Button/ToggleButton";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
 import { EssentialOption } from "@/ui/components/ProductOptionsManager";
+import { CATEGORIES } from "@/constants/categories";
+import RegularButton from "@/ui/components/Button/RegularButton";
+import CheckBox from "@/ui/components/CheckBox/CheckBox";
+import { Tags } from "lucide-react";
+import Tag from "@/ui/components/Tag";
+import { TagProps } from "@/ui/components/Tag";
 
 const Page = () => {
   const [hasMultipleOptions, setHasMultipleOptions] = useState<boolean>(true);
   const [essentialOptions, setEssentialOptions] = useState<EssentialOption[]>(
     []
   );
+  const [tags, setTags] = useState<string[]>([]);
 
   const handleChangeOptions = (essentialOptions: EssentialOption[]) => {
     setEssentialOptions(essentialOptions);
   };
+
+  function handleKeyDown(value: string): boolean {
+    if (value.trim() !== "") {
+      setTags((prevTags) => [...prevTags, value.trim()]);
+      return true;
+    }
+    return false;
+  }
 
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
@@ -36,7 +51,9 @@ const Page = () => {
       <div className="w-full flex-1 flex gap-4">
         <div className="flex-1 flex flex-col bg-white rounded-md px-4 shadow divide-y divide-slate-200">
           <div className="flex flex-col gap-4 py-6">
-            <h3 className="text-base font-bold text-slate-900">Information</h3>
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Information
+            </h3>
             <TextInput
               label="Product Name"
               // value=""
@@ -49,11 +66,15 @@ const Page = () => {
             />
           </div>
           <div className="flex flex-col gap-4 py-6">
-            <h3 className="text-base font-bold text-slate-900">Images</h3>
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Images
+            </h3>
             <FileUploader />
           </div>
           <div className="flex flex-col gap-4 py-6">
-            <h3 className="text-base font-bold text-slate-900">Price</h3>
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Price
+            </h3>
             <div className="flex items-center justify-between">
               <TextInput label="Product Price" placeholder="Enter price" />
               <TextInput
@@ -65,7 +86,7 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col gap-4 py-6">
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-slate-900 capitalize">
               Different Options
             </h3>
             <ToggleButton
@@ -95,7 +116,55 @@ const Page = () => {
             )}
           </div>
         </div>
-        <div className="w-96"></div>
+        <div className="w-96 flex flex-col gap-6">
+          <div className="flex flex-col gap-4 bg-white rounded-md px-4 py-6 shadow">
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Categories
+            </h3>
+            <ul className="flex flex-col gap-4">
+              {CATEGORIES.map((category) => (
+                <li key={category.id}>
+                  <CheckBox
+                    id={`category-${category.id}`}
+                    name="categories"
+                    value={category.id}
+                    label={category.name}
+                    className="gap-2 text-sm text-slate-900 capitalize font-normal"
+                    checkBoxClassName="size-5"
+                    inputClassName="rounded border border-slate-300"
+                  />
+                </li>
+              ))}
+            </ul>
+            <RegularButton
+              title="Create New"
+              onClick={() => {}}
+              className="w-fit text-blue-500 bg-transparent"
+            />
+          </div>
+          <div className="flex flex-col gap-4 bg-white rounded-md px-4 py-6 shadow">
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Tags
+            </h3>
+            <TextInput
+              label="Add Tags"
+              placeholder="Enter tag name"
+              onKeyDown={handleKeyDown}
+            />
+            <ul className="flex flex-wrap gap-4">
+              {tags.map((tag, index) => (
+                <Tag
+                  key={index}
+                  id={index}
+                  title={tag}
+                  onRemoveValue={(id) =>
+                    setTags(tags.filter((_, i) => i !== id))
+                  }
+                />
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );

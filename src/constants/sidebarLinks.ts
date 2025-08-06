@@ -1,6 +1,6 @@
 import { IconName } from "@/ui/components/Icon/icons";
 
-interface SidebarLink {
+type SidebarLink = {
   href: string;
   label: string;
   icon:IconName;
