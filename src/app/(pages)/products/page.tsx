@@ -11,13 +11,14 @@ const Page = () => {
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader
         title="product"
-        regularButtons={[
+        buttons={[
           {
             variant: "secondary",
             title: "export",
           },
+        ]}
+        links={[
           {
-            asLink: true,
             title: "add product",
             iconName: "plus",
             iconClassName: "size-6",
@@ -53,9 +54,9 @@ const Page = () => {
                 <th>
                   <CheckBox
                     label="product"
-                    className="gap-2 text-sm text-slate-500 capitalize font-normal"
-                    checkBoxClassName="size-5"
-                    inputClassName="rounded border border-slate-300"
+                    labelClasses="gap-2 text-sm text-slate-500 capitalize font-normal"
+                    checkboxClasses="size-5"
+                    className="rounded border border-slate-300"
                   />
                 </th>
                 <th className="capitalize font-normal">inventory</th>

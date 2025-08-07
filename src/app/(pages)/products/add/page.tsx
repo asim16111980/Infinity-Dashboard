@@ -3,14 +3,13 @@ import TextInput from "@/ui/components/TextInput/TextInput";
 import PageHeader from "@/ui/components/PageHeader/PageHeader";
 import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
-import ToggleButton from "@/ui/components/Button/ToggleButton";
+import { ToggleCheckbox } from "@/ui/components/CheckBox";
 import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
 import { EssentialOption } from "@/ui/components/ProductOptionsManager";
 import { CATEGORIES } from "@/constants/categories";
 import RegularButton from "@/ui/components/Button/RegularButton";
 import CheckBox from "@/ui/components/CheckBox/CheckBox";
-import { Tags } from "lucide-react";
 import Tag from "@/ui/components/Tag";
 import { TagProps } from "@/ui/components/Tag";
 import CustomLink from "@/ui/components/CustomLink";
@@ -38,15 +37,7 @@ const Page = () => {
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader
         title="add product"
-        regularButtons={[
-          {
-            variant: "secondary",
-            title: "cancel",
-          },
-          {
-            title: "save",
-          },
-        ]}
+        buttons={[{ variant: "secondary", title: "cancel" }, { title: "save" }]}
         backButton
       />
       <div className="w-full flex-1 flex gap-4">
@@ -83,14 +74,14 @@ const Page = () => {
                 placeholder="Price at Discount"
               />
             </div>
-            <ToggleButton label="Add tax for this product" />
+            <ToggleCheckbox label="Add tax for this product" />
           </div>
 
           <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900 capitalize">
               Different Options
             </h3>
-            <ToggleButton
+            <ToggleCheckbox
               label="This product has multiple options"
               checked={hasMultipleOptions}
               onChange={() => setHasMultipleOptions(!hasMultipleOptions)}
@@ -138,9 +129,9 @@ const Page = () => {
                     name="categories"
                     value={category.id}
                     label={category.name}
-                    className="gap-2 text-sm text-slate-900 capitalize font-normal"
-                    checkBoxClassName="size-5"
-                    inputClassName="rounded border border-slate-300"
+                    labelClasses="gap-2 text-sm text-slate-900 capitalize font-normal"
+                    checkboxClasses="size-5"
+                    className="rounded border border-slate-300"
                   />
                 </li>
               ))}

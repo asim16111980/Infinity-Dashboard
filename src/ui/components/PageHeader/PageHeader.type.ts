@@ -1,7 +1,9 @@
 import { ButtonProps } from "../Button/button.type";
+import { CustomLinkProps } from "../CustomLink";
 
 export interface PageHeaderProps {
   title: string;
-  regularButtons?: ButtonProps[];
+  buttons?: ButtonProps[];
+  links?: CustomLinkProps[];
   backButton?: boolean;
 }

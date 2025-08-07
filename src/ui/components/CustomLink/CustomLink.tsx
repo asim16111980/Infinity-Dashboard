@@ -1,19 +1,32 @@
 import Link from "next/link";
 import { CustomLinkProps } from "./customLink.type";
 import Icon from "../Icon/Icon";
+import clsx from "clsx";
 
 const CustomLink = ({
-  href,
-  className,
+  variant = "primary",
   title,
   iconName,
   iconClassName,
+  className,
+  href = "#",
+  ...props
 }: CustomLinkProps) => {
+  const classes = clsx(
+    "flex items-center justify-center rounded select-none",
+    {
+      "gap-2 px-6 py-2 text-white text-base bg-blue-700": variant === "primary",
+      "bg-white text-base text-blue-700": variant === "secondary",
+    },
+    variant === "custom" && className
+  );
+
   return (
     <Link
-      href={href ?? "#"}
-      className={className}
+      href={href}
+      className={classes}
       aria-label={title ?? undefined}
+      {...props}
     >
       {iconName && (
         <Icon name={iconName} className={iconClassName} aria-hidden="true" />

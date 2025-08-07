@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import RegularButton from "../Button/RegularButton";
 import { PageHeaderProps } from "./PageHeader.type";
+import RegularButton from "../Button/RegularButton";
+import CustomLink from "../CustomLink/CustomLink";
 
 const PageHeader = ({
   title,
-  regularButtons,
+  buttons,
+  links,
   backButton = false,
 }: PageHeaderProps) => {
   const router = useRouter();
@@ -25,10 +27,12 @@ const PageHeader = ({
         <h2 className="text-2xl font-bold text-gray-900 capitalize">{title}</h2>
       </div>
       <div className="flex items-center gap-3">
-        {regularButtons &&
-          regularButtons.map((button, index) => (
+        {buttons &&
+          buttons.map((button, index) => (
             <RegularButton key={index} {...button} />
           ))}
+        {links &&
+          links.map((link, index) => <CustomLink key={index} {...link} />)}
       </div>
     </div>
   );

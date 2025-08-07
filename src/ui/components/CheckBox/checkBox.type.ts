@@ -1,10 +1,9 @@
-export interface CheckBoxProps {
-  id?: string
-  name?: string;
-  value?: string | number;
-  checked?: boolean;
+import React from "react";
+export interface CheckBoxProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  className?: string;
-  checkBoxClassName?: string;
-  inputClassName?: string;
+  checkboxClasses?: string;
+  labelClasses?: string;
 }
+
+export interface ToggleCheckboxProps extends CheckBoxProps {}

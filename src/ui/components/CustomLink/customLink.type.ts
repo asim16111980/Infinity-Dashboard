@@ -1,9 +1,9 @@
 import { IconName } from "../Icon";
-
-export type CustomLinkProps = {
-  href?: string;
-  className?: string;
+import { LinkProps } from "next/link";
+export interface CustomLinkProps extends LinkProps {
+  variant?: "primary" | "secondary" | "custom";
   title?: string;
+  className?: string;
   iconName?: IconName;
   iconClassName?: string;
-};
+}

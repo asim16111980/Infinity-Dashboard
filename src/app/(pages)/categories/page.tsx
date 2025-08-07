@@ -1,7 +1,9 @@
+import PageHeader from "@/ui/components/PageHeader";
+
 export default function Page() {
     return (
         <div>
-            <h1>Categories</h1>
+            <PageHeader title="Categories" />
         </div>
     );
 }
