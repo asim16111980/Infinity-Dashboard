@@ -1,6 +1,6 @@
 "use client";
-import TextInput from "@/ui/components/TextInput/TextInput";
-import PageHeader from "@/ui/components/PageHeader/PageHeader";
+import TextInput from "@/ui/components/TextInput";
+import PageHeader from "@/ui/components/PageHeader";
 import Textarea from "@/ui/components/Textarea/Textarea";
 import FileUploader from "@/ui/components/FileUploader/FileUploader";
 import { ToggleCheckbox } from "@/ui/components/CheckBox";
@@ -8,10 +8,8 @@ import ProductOptionsManager from "@/ui/components/ProductOptionsManager";
 import { useState } from "react";
 import { EssentialOption } from "@/ui/components/ProductOptionsManager";
 import { CATEGORIES } from "@/constants/categories";
-import RegularButton from "@/ui/components/Button/RegularButton";
-import CheckBox from "@/ui/components/CheckBox/CheckBox";
+import CheckBox from "@/ui/components/CheckBox";
 import Tag from "@/ui/components/Tag";
-import { TagProps } from "@/ui/components/Tag";
 import CustomLink from "@/ui/components/CustomLink";
 
 const Page = () => {
@@ -77,7 +75,7 @@ const Page = () => {
             <ToggleCheckbox label="Add tax for this product" />
           </div>
 
-          <div className="flex flex-col gap-4 py-6">
+          <div className="flex flex-col gap-6 py-6">
             <h3 className="text-base font-bold text-slate-900 capitalize">
               Different Options
             </h3>
@@ -117,7 +115,7 @@ const Page = () => {
           </div>
         </div>
         <div className="w-96 flex flex-col gap-6">
-          <div className="flex flex-col gap-4 bg-white rounded-md px-4 py-6 shadow">
+          <div className="flex flex-col items-start gap-4 bg-white rounded-md px-4 py-6 shadow">
             <h3 className="text-base font-bold text-slate-900 capitalize">
               Categories
             </h3>
@@ -137,8 +135,8 @@ const Page = () => {
               ))}
             </ul>
             <CustomLink
+              variant="secondary"
               href="/categories/create"
-              className="w-fit text-blue-500 bg-transparent"
               title="Create New"
             />
           </div>

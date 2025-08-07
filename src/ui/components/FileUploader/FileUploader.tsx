@@ -61,7 +61,7 @@ const FileUploader = () => {
             title={selectedFiles.length > 0 ? "" : "Add files"}
             iconName="plus"
             aria-label="Add files"
-            iconClassName={selectedFiles.length > 0 ? "block" : "hidden"}
+            iconClasses={selectedFiles.length > 0 ? "block" : "hidden"}
             className={clsx(
               "text-blue-500 border border-slate-200 bg-white",
               selectedFiles.length > 0
@@ -92,7 +92,7 @@ const FileUploader = () => {
                 onClick={handleRemove.bind(null, idx)}
                 title="Remove"
                 className="absolute top-1 right-1 size-6 bg-white bg-opacity-70 rounded-full p-1 hover:bg-opacity-100 transition"
-                iconClassName="text-red-500"
+                iconClasses="text-red-500"
                 aria-label="Remove"
                 iconName="trash"
               />

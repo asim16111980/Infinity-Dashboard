@@ -15,8 +15,8 @@ const CustomLink = ({
   const classes = clsx(
     "flex items-center justify-center rounded select-none",
     {
-      "gap-2 px-6 py-2 text-white text-base bg-blue-700": variant === "primary",
-      "bg-white text-base text-blue-700": variant === "secondary",
+      "gap-2 px-6 py-2 text-white text-base bg-blue-600": variant === "primary",
+      "bg-white text-base text-blue-600": variant === "secondary",
     },
     variant === "custom" && className
   );

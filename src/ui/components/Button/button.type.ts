@@ -1,8 +1,8 @@
 import { IconName } from "../Icon/icons";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "custom";
   iconName?: IconName;
-  iconClassName?: string;
+  iconClasses?: string;
   title?: string;
 }

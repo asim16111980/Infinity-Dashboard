@@ -1,7 +1,7 @@
 import IconButton from "@/ui/components/Button/IconButton";
-import CheckBox from "@/ui/components/CheckBox/CheckBox";
-import Dropdown from "@/ui/components/Dropdown/Dropdown";
-import PageHeader from "@/ui/components/PageHeader/PageHeader";
+import CheckBox from "@/ui/components/CheckBox";
+import Dropdown from "@/ui/components/Dropdown";
+import PageHeader from "@/ui/components/PageHeader";
 import SearchBox from "@/ui/components/SearchBox/SearchBox";
 import { FILTER_ITEMS } from "@/constants/filterItems";
 import Link from "next/link";
@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <section className="size-full flex flex-col gap-7 bg-slate-200 p-7">
       <PageHeader
-        title="product"
+        title="products"
         buttons={[
           {
             variant: "secondary",

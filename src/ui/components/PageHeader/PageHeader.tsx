@@ -12,14 +12,16 @@ const PageHeader = ({
   backButton = false,
 }: PageHeaderProps) => {
   const router = useRouter();
+
   return (
     <div className="w-full flex items-center justify-between">
       <div className="flex flex-col">
         {backButton && (
           <RegularButton
+            variant="custom"
             title="back"
             iconName="arrowLeft"
-            iconClassName="size-3.5 text-slate-500"
+            iconClasses="size-3.5 text-slate-500"
             className="w-12 h-5 p-0 text-sm text-slate-600 gap-1"
             onClick={() => router.back()}
           />

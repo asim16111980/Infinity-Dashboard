@@ -76,7 +76,7 @@ const ProductOptionsManager = ({
   }, [selectedOptions]);
 
   return (
-    <div className="w-full flex flex-col items-start gap-4">
+    <div className="w-full flex flex-col items-start gap-6 py-2">
       {selectedOptions.map((option, index) => (
         <ProductOptionSelector
           id={index}
@@ -88,10 +88,11 @@ const ProductOptionsManager = ({
         />
       ))}
       <RegularButton
+        variant="custom"
         title="add more"
         onClick={addNewOptionSelector}
         disabled={selectedOptions.length === initialOptions.length}
-        className="text-blue-600"
+        className="w-fit text-blue-600 bg-transparent"
       />
     </div>
   );

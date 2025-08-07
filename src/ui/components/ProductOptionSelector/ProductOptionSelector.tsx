@@ -37,7 +37,7 @@ const ProductOptionSelector = ({
   }, [initialOption]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <span className="text-base font-bold text-slate-900">{label}</span>
       <div className="flex items-center gap-6">
         <Dropdown
