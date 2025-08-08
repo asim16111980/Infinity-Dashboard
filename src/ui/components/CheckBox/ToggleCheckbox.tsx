@@ -1,14 +1,14 @@
 "use client";
-
 import clsx from "clsx";
 import { ToggleCheckboxProps } from "../CheckBox/checkBox.type";
+import { useState } from "react";
 
 const ToggleCheckbox = ({
   label,
   labelClasses,
   ...props
 }: ToggleCheckboxProps) => {
-
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <label
       className={clsx(
@@ -19,8 +19,8 @@ const ToggleCheckbox = ({
       <input
         type="checkbox"
         className="hidden peer"
-        checked={props.checked}
-        onChange={props.onChange}
+        checked={isChecked}
+        onChange={(e) => setIsChecked(e.target.checked)}
         {...props}
       />
       <span className="w-11 h-6 flex items-center justify-start p-1 rounded-2xl bg-blue-100 transition duration-300 peer-checked:bg-blue-600 peer-checked:justify-end">

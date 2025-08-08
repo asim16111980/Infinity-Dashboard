@@ -9,6 +9,7 @@ import {
   Tag,
   X,
   Folder,
+  EllipsisVertical
 } from "lucide-react";
 
 export const ICONS_MAP = {
@@ -22,6 +23,7 @@ export const ICONS_MAP = {
   tag: Tag,
   x: X,
   folder: Folder,
+  ellipsisVertical:EllipsisVertical
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;
