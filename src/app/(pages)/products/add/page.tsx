@@ -59,7 +59,7 @@ const Page = () => {
             <h3 className="text-base font-bold text-slate-900 capitalize">
               Images
             </h3>
-            <FileUploader />
+            <FileUploader maxFiles={5} />
           </div>
           <div className="flex flex-col gap-4 py-6">
             <h3 className="text-base font-bold text-slate-900 capitalize">
@@ -147,7 +147,7 @@ const Page = () => {
             <TextInput
               label="Add Tags"
               placeholder="Enter tag name"
-              onKeyDown={handleKeyDown}
+              onEnterValue={handleKeyDown}
             />
             <ul className="flex flex-wrap gap-4">
               {tags.map((tag, index) => (

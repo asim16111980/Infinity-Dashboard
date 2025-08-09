@@ -2,8 +2,10 @@ import IconButton from "@/ui/components/Button/IconButton";
 import RegularButton from "@/ui/components/Button/RegularButton";
 import { ToggleCheckbox } from "@/ui/components/CheckBox";
 import CustomLink from "@/ui/components/CustomLink";
+import FileUploader from "@/ui/components/FileUploader";
 import Icon from "@/ui/components/Icon";
 import PageHeader from "@/ui/components/PageHeader";
+import TextInput from "@/ui/components/TextInput/TextInput";
 import Image from "next/image";
 
 export default function Page() {
@@ -55,7 +57,19 @@ export default function Page() {
             <h3 className="text-base font-bold text-slate-900 capitalize">
               Category Visibility
             </h3>
-            <ToggleCheckbox label="Visible on site" />
+            <ToggleCheckbox label="Visible on site" checked />
+          </div>
+          <div className="flex flex-col items-start gap-4 bg-white rounded-md px-4 py-6 shadow">
+            <h3 className="text-base font-bold text-slate-900 capitalize">
+              Category Info
+            </h3>
+            <div className="flex flex-col gap-6 w-full">
+              <TextInput
+                label="Category Name"
+                placeholder="Enter category name"
+              />
+              <FileUploader label="Image" />
+            </div>
           </div>
         </div>
       </div>

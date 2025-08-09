@@ -1,8 +1,8 @@
-export interface TextInputProps {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   // value: string;
   // onChange: (value: string) => void;
-  onKeyDown?: (value: string) => boolean;
+  onEnterValue?: (value: string) => boolean;
   placeholder?: string;
   className?: string;
 }
