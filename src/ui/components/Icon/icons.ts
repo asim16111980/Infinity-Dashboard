@@ -9,8 +9,9 @@ import {
   Tag,
   X,
   Folder,
-  EllipsisVertical
+  EllipsisVertical,
 } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 
 export const ICONS_MAP = {
   plus: Plus,
@@ -23,7 +24,8 @@ export const ICONS_MAP = {
   tag: Tag,
   x: X,
   folder: Folder,
-  ellipsisVertical:EllipsisVertical
+  ellipsisVertical: EllipsisVertical,
+  google: FcGoogle,
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;

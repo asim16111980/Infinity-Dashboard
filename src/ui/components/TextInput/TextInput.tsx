@@ -9,6 +9,7 @@ const TextInput = ({
   placeholder,
   className,
   onEnterValue,
+  ...props
 }: TextInputProps) => {
   const [value, setValue] = useState("");
 
@@ -22,7 +23,7 @@ const TextInput = ({
     <label className={clsx("flex flex-col gap-1 select-none", className)}>
       <span className="text-sm text-slate-600 capitalize">{label}</span>
       <input
-        type="text"
+        type={props.type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
