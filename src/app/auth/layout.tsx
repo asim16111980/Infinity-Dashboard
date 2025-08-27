@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import Header from "../../ui/layout/Header";
-import SidebarNav from "../../ui/layout/Sidebar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -26,12 +23,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen grid grid-rows-[64px,1fr]">
-        <Header userAvatar="" />
-        <div className="size-full flex">
-          <SidebarNav />
-          <main className="flex-1">{children}</main>
-        </div>
+      <body className="min-h-screen flex justify-center items-center bg-slate-100">
+       {children}
       </body>
     </html>
   );

@@ -8,25 +8,26 @@ const CheckBox = ({
   label,
   checkboxClasses,
   labelClasses,
+  titleClasses,
   ...props
 }: CheckBoxProps) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <label className={clsx("cursor-pointer flex items-center", labelClasses)}>
-      <div className={clsx("relative", checkboxClasses)}>
+    <label className={clsx("cursor-pointer flex items-center gap-3", labelClasses)}>
+      <div className={clsx("relative flex justify-center items-center size-4 ", checkboxClasses)}>
         <input
           type="checkbox"
           className={clsx(
-            "size-full appearance-none peer checked:bg-blue-600 checked:border-blue-600 cursor-pointer",
+            "size-full appearance-none peer checked:bg-blue-600 border border-slate-200 bg-white rounded checked:border-blue-600 cursor-pointer",
             props.className
           )}
           {...props}
           checked={isChecked}
           onChange={(e) => setIsChecked(e.target.checked)}
         />
-        <Check className="absolute size-full stroke-[4] p-1 inset-0 text-white invisible peer-checked:visible" />
+        <Check className="absolute size-full stroke-[4] p-px inset-0 text-white invisible peer-checked:visible" />
       </div>
-      {label}
+      <span className={titleClasses}>{label}</span>
     </label>
   );
 };

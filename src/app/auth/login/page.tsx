@@ -1,4 +1,5 @@
 import RegularButton from "@/ui/components/Button/RegularButton";
+import CheckBox from "@/ui/components/CheckBox";
 import CustomLink from "@/ui/components/CustomLink";
 import TextInput from "@/ui/components/TextInput";
 
@@ -8,13 +9,7 @@ export default function Home() {
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-3xl font-bold text-slate-900">Sign In</h1>
         <p className="text-base text-slate-500">
-          Have an Account?{" "}
-          <CustomLink
-            variant="custom"
-            href="/login"
-            title="Sign in"
-            className="text-blue-600"
-          />
+          Login to access your dashboard
         </p>
       </div>
       <div className="w-full flex flex-col items-center gap-4 divide-y">
@@ -26,38 +21,40 @@ export default function Home() {
               placeholder="Password"
               type="password"
             />
+            <CheckBox label="Remember me" titleClasses="text-sm text-slate-600"/>
             <RegularButton
               variant="custom"
               type="submit"
-              title="Create Account"
+              title="Login"
               className="p-2 bg-blue-950 text-white"
             />
           </form>
           <p className="flex flex-col items-center gap-4 text-sm">
-            <span className="text-slate-500">
-              By creating account, you agree to our
-            </span>
-            <span>
               <CustomLink
                 variant="custom"
                 href="/terms"
-                title="Terms of Service"
+                title="Forgot your password?"
                 className="text-blue-600"
               />
-            </span>
           </p>
         </div>
         <div className="w-full flex flex-col items-center gap-4 p-4">
           <p className="flex flex-col items-center gap-4 text-sm text-slate-500">
-            Or create an account using:
+           Or sign in using:
           </p>
           <RegularButton
-            variant="custom" type="button" title="Continue with Google"
-            className="w-full gap-4 p-2 bg-white text-blue-500 border border-slate-300" iconName="google"
+            variant="custom"
+            type="button"
+            title="Continue with Google"
+            className="w-full gap-4 p-2 bg-white text-blue-500 border border-slate-300"
+            iconName="google"
           />
           <RegularButton
-            variant="custom" type="button" title="Continue with Facebook"
-            className="w-full gap-4 p-2 bg-white text-blue-500 border border-slate-300" iconName="facebook"
+            variant="custom"
+            type="button"
+            title="Continue with Facebook"
+            className="w-full gap-4 p-2 bg-white text-blue-500 border border-slate-300"
+            iconName="facebook"
           />
         </div>
       </div>
