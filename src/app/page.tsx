@@ -8,7 +8,7 @@ export default function Home() {
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-3xl font-bold text-slate-900">Create an Account</h1>
         <p className="text-base text-slate-500">
-          Have an Account?{" "}
+          Have an Account?
           <CustomLink
             variant="custom"
             href="/login"
