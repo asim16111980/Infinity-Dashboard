@@ -14,21 +14,7 @@ export default function Home() {
       </div>
       <div className="w-full flex flex-col items-center gap-4 divide-y">
         <div className="w-full flex flex-col items-center gap-4">
-          <form className="w-full flex flex-col gap-4">
-            <TextInput label="Email" placeholder="Email" />
-            <TextInput
-              label="Password"
-              placeholder="Password"
-              type="password"
-            />
-            <CheckBox label="Remember me" titleClasses="text-sm text-slate-600"/>
-            <RegularButton
-              variant="custom"
-              type="submit"
-              title="Login"
-              className="p-2 bg-blue-950 text-white"
-            />
-          </form>
+          
           <p className="flex flex-col items-center gap-4 text-sm">
               <CustomLink
                 variant="custom"
