@@ -1,7 +1,6 @@
 import RegularButton from "@/ui/components/Button/RegularButton";
-import CheckBox from "@/ui/components/CheckBox";
+import LoginForm from "@/ui/components/Forms";
 import CustomLink from "@/ui/components/CustomLink";
-import TextInput from "@/ui/components/TextInput";
 
 export default function Home() {
   return (
@@ -14,19 +13,19 @@ export default function Home() {
       </div>
       <div className="w-full flex flex-col items-center gap-4 divide-y">
         <div className="w-full flex flex-col items-center gap-4">
-          
+          <LoginForm />
           <p className="flex flex-col items-center gap-4 text-sm">
-              <CustomLink
-                variant="custom"
-                href="/terms"
-                title="Forgot your password?"
-                className="text-blue-600"
-              />
+            <CustomLink
+              variant="custom"
+              href="/terms"
+              title="Forgot your password?"
+              className="text-blue-600"
+            />
           </p>
         </div>
         <div className="w-full flex flex-col items-center gap-4 p-4">
           <p className="flex flex-col items-center gap-4 text-sm text-slate-500">
-           Or sign in using:
+            Or sign in using:
           </p>
           <RegularButton
             variant="custom"
