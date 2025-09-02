@@ -13,7 +13,7 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <label className={clsx("cursor-pointer flex items-center gap-3", labelClasses)}>
+    <label className={clsx("w-fit cursor-pointer select-none flex items-center gap-3", labelClasses)}>
       <div className={clsx("relative flex justify-center items-center size-4 ", checkboxClasses)}>
         <input
           type="checkbox"

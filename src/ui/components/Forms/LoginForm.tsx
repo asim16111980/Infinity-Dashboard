@@ -2,21 +2,50 @@
 import RegularButton from "../Button/RegularButton";
 import CheckBox from "../CheckBox";
 import TextInput from "../TextInput";
-import { useForm,SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { loginForm } from "./loginForm.type";
+import { error } from "console";
 
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm<loginForm>();
-  const onSubmit:SubmitHandler<loginForm>=(data)=>console.log(data);
-  
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<loginForm>();
+  const onSubmit: SubmitHandler<loginForm> = (data) => console.log(data);
+  const emailPattern =
+    /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  const passwordPattern =
+    /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).*$/;
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
-      <TextInput label="Email" placeholder="Email" {...register("email")} />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex flex-col gap-4"
+    >
+      <TextInput
+        label="Email"
+        placeholder="Email"
+        {...register("email", {
+          required: "Email is required",
+          pattern: { value: emailPattern, message: "Invalid email address" },
+        })}
+        aria-invalid={errors.email ? "true" : "false"}
+        error={errors.email?.message}
+      />
       <TextInput
         label="Password"
         placeholder="Password"
         type="password"
-        {...register("password")}
+        {...register("password", {
+          required: "Password is required",
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters.",
+          },
+          pattern: { value: passwordPattern, message: "Invalid password" },
+        })}
+        aria-invalid={errors.password ? "true" : "false"}
+        error={errors.password?.message}
       />
       <CheckBox label="Remember me" titleClasses="text-sm text-slate-600" />
       <RegularButton

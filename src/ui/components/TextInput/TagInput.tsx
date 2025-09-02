@@ -25,7 +25,7 @@ const TagInput = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="w-full h-10 px-4 py-2 border border-slate-200 rounded-md p-2 text-base placeholder:text-slate-400 text-slate-900 capitalize focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full h-10 px-4 py-2 border border-slate-200 rounded-md text-base placeholder:text-slate-400 text-slate-900 capitalize focus:outline-none focus:ring-2 focus:ring-blue-500"
         {...props}
       />
     </label>
