@@ -15,7 +15,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           ref={ref}
           type={type || "text"}
           className={clsx(
-            "w-full h-10 px-4 py-2 border-none rounded-md text-base placeholder:text-slate-400 text-slate-900 capitalize focus:outline-none ring-2 focus:ring-blue-500",
+            "w-full h-10 px-4 py-2 border-none rounded-md text-base placeholder:text-slate-400 text-slate-900 focus:outline-none ring-2 focus:ring-blue-500",
             error ? "ring-red-500" : "ring-slate-200"
           )}
           {...inputProps}

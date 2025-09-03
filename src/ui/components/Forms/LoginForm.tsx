@@ -18,24 +18,32 @@ const LoginForm = () => {
     register,
     formState: { errors, isSubmitted },
     handleSubmit,
+    setError,
   } = useForm<loginForm>();
 
   const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
       const loginRes = await postData<loginForm>(
-        "http://localhost:5000/api/auth/login",
+        `${API_URL}/api/auth/login`,
         loginData
       );
 
       if (loginRes.status === "success") {
-        router.push("/dashboard");
+        router.push("/");
       } else {
+        setError("password", {
+          type: "server",
+          message: loginRes.message || "Wrong email or password",
+        });
       }
-    } catch (err) {}
-  };
-
-  const onError: SubmitErrorHandler<loginForm> = async (errors) => {
-    console.log(errors);
+    } catch (err) {
+      setError("password", {
+        type: "server",
+        message: "Something went wrong, please try again.",
+      });
+    }
   };
 
   return (
@@ -64,7 +72,11 @@ const LoginForm = () => {
             value: 8,
             message: "Password must be at least 8 characters.",
           },
-          pattern: { value: passwordPattern, message: "Invalid password" },
+          pattern: {
+            value: passwordPattern,
+            message:
+              "Password must contain upper, lower, number and special character",
+          },
         })}
         aria-invalid={errors.password ? "true" : "false"}
         error={isSubmitted ? !!errors.password : false}
