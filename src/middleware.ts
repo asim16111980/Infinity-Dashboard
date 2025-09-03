@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("authToken"); 
   
+  const token = req.cookies.get("authToken");
+  console.log("Request URL:", token);
+
   const isAuthPage = req.nextUrl.pathname.startsWith("/login");
 
   if (!token && !isAuthPage) {
