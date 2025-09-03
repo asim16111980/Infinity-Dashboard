@@ -3,6 +3,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   // value: string;
   // onChange: (value: string) => void;
   onEnterValue?: (value: string) => boolean;
-  error?: string;
+  error?: boolean;
+  helperText?: string;
   // className?: string;
 }

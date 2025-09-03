@@ -2,10 +2,10 @@
 import RegularButton from "../Button/RegularButton";
 import CheckBox from "../CheckBox";
 import TextInput from "../TextInput";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import { loginForm } from "./loginForm.type";
 import { postData } from "@/app/api/auth/route";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -13,24 +13,29 @@ const LoginForm = () => {
     /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const passwordPattern =
     /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).*$/;
-  
+
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitted },
     handleSubmit,
   } = useForm<loginForm>();
 
- const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
-    const loginRes = await postData<loginForm>(
-      "http://localhost:5000/api/auth/login",
-      loginData
-    );
+  const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
+    try {
+      const loginRes = await postData<loginForm>(
+        "http://localhost:5000/api/auth/login",
+        loginData
+      );
 
-    console.log("Login Response:", loginRes);
+      if (loginRes.status === "success") {
+        router.push("/dashboard");
+      } else {
+      }
+    } catch (err) {}
+  };
 
-    if (loginRes.status === "success") {
-      router.push("/dashboard");
-    }
+  const onError: SubmitErrorHandler<loginForm> = async (errors) => {
+    console.log(errors);
   };
 
   return (
@@ -46,7 +51,8 @@ const LoginForm = () => {
           pattern: { value: emailPattern, message: "Invalid email address" },
         })}
         aria-invalid={errors.email ? "true" : "false"}
-        error={errors.email?.message}
+        error={isSubmitted ? !!errors.email : false}
+        helperText={errors.email?.message}
       />
       <TextInput
         label="Password"
@@ -61,7 +67,8 @@ const LoginForm = () => {
           pattern: { value: passwordPattern, message: "Invalid password" },
         })}
         aria-invalid={errors.password ? "true" : "false"}
-        error={errors.password?.message}
+        error={isSubmitted ? !!errors.password : false}
+        helperText={errors.password?.message}
       />
       <CheckBox label="Remember me" titleClasses="text-sm text-slate-600" />
       <RegularButton
