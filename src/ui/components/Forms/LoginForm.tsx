@@ -39,6 +39,7 @@ const LoginForm = () => {
         });
       }
     } catch (err) {
+      console.log(process.env.NEXT_PUBLIC_API_URL);
       setError("password", {
         type: "server",
         message: "Something went wrong, please try again.",
@@ -82,7 +83,11 @@ const LoginForm = () => {
         error={isSubmitted ? !!errors.password : false}
         helperText={errors.password?.message}
       />
-      <CheckBox label="Remember me" titleClasses="text-sm text-slate-600" />
+      <CheckBox
+        label="Remember me"
+        titleClasses="text-sm text-slate-600"
+        {...register("remember")}
+      />
       <RegularButton
         variant="custom"
         type="submit"

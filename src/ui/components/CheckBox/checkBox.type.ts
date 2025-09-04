@@ -6,5 +6,3 @@ export interface CheckBoxProps
   labelClasses?: string;
   titleClasses?: string;
 }
-
-export interface ToggleCheckboxProps extends CheckBoxProps {}

@@ -1,13 +1,13 @@
 "use client";
 import clsx from "clsx";
-import { ToggleCheckboxProps } from "../CheckBox/checkBox.type";
+import { CheckBoxProps } from "../CheckBox/checkBox.type";
 import { useEffect, useState } from "react";
 
 const ToggleCheckbox = ({
   label,
   labelClasses,
   ...props
-}: ToggleCheckboxProps) => {
+}: CheckBoxProps) => {
   const [isChecked, setIsChecked] = useState(props.checked);
 
   useEffect(() => {
