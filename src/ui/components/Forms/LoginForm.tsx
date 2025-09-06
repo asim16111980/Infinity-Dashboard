@@ -6,8 +6,10 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import { loginForm } from "./loginForm.type";
 import { postData } from "@/app/api/auth/route";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/authContext";
 
 const LoginForm = () => {
+  // const { setToken } = useAuth();
   const router = useRouter();
   const emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -31,7 +33,10 @@ const LoginForm = () => {
       );
 
       if (loginRes.status === "success") {
-        router.push("/");
+        console.log(loginRes.authToken);
+        
+        // setToken(loginRes.authToken);
+        // router.push("/");
       } else {
         setError("password", {
           type: "server",

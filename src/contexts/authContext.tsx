@@ -14,7 +14,7 @@ type AuthContextType = {
   setToken: (val: string | null) => void;
   refreshToken: () => Promise<void>;
 };
-
+const SERVER_URL = process.env.NEXT_PUBLIC_API_URL;
 const AuthContext = createContext<AuthContextType | null>(null);
 
 type AuthProviderProps = {
@@ -25,13 +25,21 @@ type AuthProviderProps = {
 export function AuthProvider({ children, initialToken }: AuthProviderProps) {
   const [token, setToken] = useState<string | null>(initialToken ?? null);
   const [expiry, setExpiry] = useState<number | null>(null);
-
   const refreshToken = useCallback(async () => {
     try {
-      const res = await fetch("/api/auth/refresh", {
+      const sid = document.cookie
+        .split("; ")
+        .find((c) => c.startsWith("connect.sid"));
+      if (!sid) {
+        console.log("No session cookie, skip refresh");
+        return;
+      }
+
+      const res = await fetch(`${SERVER_URL}/api/auth/refresh-token`, {
         method: "post",
         credentials: "include",
       });
+
       if (!res.ok) throw new Error("Refresh failed");
       const data: { accessToken: string; expiresIn: number } = await res.json();
       setToken(data.accessToken);

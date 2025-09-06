@@ -1,11 +1,8 @@
 import RegularButton from "@/ui/components/Button/RegularButton";
 import LoginForm from "@/ui/components/Forms";
 import CustomLink from "@/ui/components/CustomLink";
-import { useAuth } from "@/contexts/authContext";
 
 export default function LoginPage() {
-  const { setToken } = useAuth();
-
   return (
     <main className="w-[540px] flex flex-col items-center justify-between gap-8 p-14 bg-white rounded-md shadow">
       <div className="flex flex-col items-center gap-2">
