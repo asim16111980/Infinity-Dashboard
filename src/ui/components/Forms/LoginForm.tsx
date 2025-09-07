@@ -33,8 +33,6 @@ const LoginForm = () => {
       );
 
       if (loginRes.status === "success") {
-        console.log(loginRes.authToken);
-        
         // setToken(loginRes.authToken);
         // router.push("/");
       } else {
@@ -44,16 +42,17 @@ const LoginForm = () => {
         });
       }
     } catch (err) {
-      console.log(process.env.NEXT_PUBLIC_API_URL);
       setError("password", {
         type: "server",
-        message: "Something went wrong, please try again.",
+        message: "Service temporarily unavailable. Please try again in a few minutes.",
       });
     }
   };
 
   return (
     <form
+      method="post"
+      action=""
       onSubmit={handleSubmit(onSubmit)}
       className="w-full flex flex-col gap-4"
     >
@@ -72,6 +71,7 @@ const LoginForm = () => {
         label="Password"
         placeholder="Password"
         type="password"
+        showPassword={true}
         {...register("password", {
           required: "Password is required",
           minLength: {

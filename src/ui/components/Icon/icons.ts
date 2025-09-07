@@ -10,6 +10,8 @@ import {
   X,
   Folder,
   EllipsisVertical,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoFacebook } from "react-icons/io5";
@@ -27,7 +29,9 @@ export const ICONS_MAP = {
   folder: Folder,
   ellipsisVertical: EllipsisVertical,
   google: FcGoogle,
-  facebook:IoLogoFacebook 
+  facebook: IoLogoFacebook,
+  eye: Eye,
+  eyeOff: EyeOff,
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;
