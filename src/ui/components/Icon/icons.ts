@@ -12,6 +12,7 @@ import {
   EllipsisVertical,
   Eye,
   EyeOff,
+  AlertCircle,
 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoFacebook } from "react-icons/io5";
@@ -32,6 +33,7 @@ export const ICONS_MAP = {
   facebook: IoLogoFacebook,
   eye: Eye,
   eyeOff: EyeOff,
+  alertCircle: AlertCircle,
 } as const;
 
 export type IconName = keyof typeof ICONS_MAP;
