@@ -7,21 +7,20 @@ import { loginForm } from "./loginForm.type";
 import { postData } from "@/app/api/auth/route";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Icon from "../Icon";
 import clsx from "clsx";
-import { error } from "console";
 
 const LoginForm = () => {
   type serverError = {
-    showError: boolean;
+    visible: boolean;
     message: string;
   };
   const [serverError, setServerError] = useState<serverError>({
-    showError: false,
+    visible: false,
     message: "",
   });
-  // const { setToken } = useAuth();
+  const { setToken } = useAuth();
   const router = useRouter();
   const emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -36,11 +35,10 @@ const LoginForm = () => {
   } = useForm<loginForm>();
 
   const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
-    setServerError((prev) => ({
-      ...prev,
-      showError: true,
-    }));
-
+    setServerError({
+      visible: false,
+      message: "",
+    });
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -50,19 +48,19 @@ const LoginForm = () => {
       );
 
       if (loginRes.status === "success") {
-        // setToken(loginRes.authToken);
-        // router.push("/");
+        setToken(loginRes.authToken);
+        router.push("/");
       } else {
-        setServerError((prev) => ({
-          ...prev,
+        setServerError({
+          visible: true,
           message: "Service unavailable. try again in a few minutes.",
-        }));
+        });
       }
     } catch (err) {
-      setServerError((prev) => ({
-        ...prev,
+      setServerError({
+        visible: true,
         message: "Network error. Please retry.",
-      }));
+      });
     }
   };
 
@@ -70,7 +68,7 @@ const LoginForm = () => {
     const sub = watch(() =>
       setServerError((prev) => ({
         ...prev,
-        showError: true,
+        visible: serverError.message ? true : false,
       }))
     );
     return () => sub.unsubscribe();
@@ -81,9 +79,7 @@ const LoginForm = () => {
       <div
         className={clsx(
           "absolute left-0 -top-5 w-full flex justify-center items-center gap-2 mb-3 p-2 bg-red-100 border border-red-300 text-red-700 rounded transition-opacity duration-500 ease-in-out",
-          serverError.showError && serverError.message
-            ? "opacity-100"
-            : "opacity-0"
+          serverError.visible ? "opacity-100" : "opacity-0"
         )}
       >
         <Icon name="alertCircle" className="size-5 shrink-0" />

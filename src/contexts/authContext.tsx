@@ -27,14 +27,6 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
   const [expiry, setExpiry] = useState<number | null>(null);
   const refreshToken = useCallback(async () => {
     try {
-      const sid = document.cookie
-        .split("; ")
-        .find((c) => c.startsWith("connect.sid"));
-      if (!sid) {
-        console.log("No session cookie, skip refresh");
-        return;
-      }
-
       const res = await fetch(`${SERVER_URL}/api/auth/refresh-token`, {
         method: "post",
         credentials: "include",

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const cookieHeader = req.headers.get("cookie") || "";
   const isAuthPage = req.nextUrl.pathname.startsWith("/login");
+console.log("Middleware running for:", req.nextUrl.pathname);
 
   let isAuthenticated = false;
   try {
