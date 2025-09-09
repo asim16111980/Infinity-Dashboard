@@ -3,13 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const cookieHeader = req.headers.get("cookie") || "";
   const isAuthPage = req.nextUrl.pathname.startsWith("/login");
-console.log("Middleware running for:", req.nextUrl.pathname);
+  console.log("Middleware running for:", cookieHeader);
 
   let isAuthenticated = false;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`, {
-      headers: { cookie: cookieHeader },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`,
+      {
+        headers: { cookie: cookieHeader },
+      }
+    );
     if (res.ok) {
       const data = await res.json();
       isAuthenticated = data.status === "success";

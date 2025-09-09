@@ -2,25 +2,26 @@
 import RegularButton from "../Button/RegularButton";
 import CheckBox from "../CheckBox";
 import TextInput from "../TextInput";
-import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { loginForm } from "./loginForm.type";
 import { postData } from "@/app/api/auth/route";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "../Icon";
 import clsx from "clsx";
 
 const LoginForm = () => {
   type serverError = {
     visible: boolean;
-    message: string;
+    message: string | null;
   };
+  const { setToken, error } = useAuth();
+
   const [serverError, setServerError] = useState<serverError>({
     visible: false,
-    message: "",
+    message: null,
   });
-  const { setToken } = useAuth();
   const router = useRouter();
   const emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -37,7 +38,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
     setServerError({
       visible: false,
-      message: "",
+      message: null,
     });
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -63,6 +64,13 @@ const LoginForm = () => {
       });
     }
   };
+  useEffect(() => {
+    if (error !== null)
+      setServerError({
+        visible: true,
+        message: error,
+      });
+  }, [error]);
 
   useEffect(() => {
     const sub = watch(() =>
@@ -76,15 +84,17 @@ const LoginForm = () => {
 
   return (
     <div className="relative w-full flex flex-col gap-4 py-10">
-      <div
-        className={clsx(
-          "absolute left-0 -top-5 w-full flex justify-center items-center gap-2 mb-3 p-2 bg-red-100 border border-red-300 text-red-700 rounded transition-opacity duration-500 ease-in-out",
-          serverError.visible ? "opacity-100" : "opacity-0"
-        )}
-      >
-        <Icon name="alertCircle" className="size-5 shrink-0" />
-        {serverError.message}
-      </div>
+      {serverError.visible && (
+        <div
+          className={clsx(
+            "absolute left-0 -top-5 w-full flex justify-center items-center gap-2 mb-3 p-2 bg-red-100 border border-red-300 text-red-700 rounded transition-opacity duration-500 ease-in-out",
+            serverError.visible ? "opacity-100" : "opacity-0"
+          )}
+        >
+          <Icon name="alertCircle" className="size-5 shrink-0" />
+          {serverError.message}
+        </div>
+      )}
       <form
         method="post"
         action=""

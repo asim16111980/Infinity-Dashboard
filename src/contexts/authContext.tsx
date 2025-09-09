@@ -11,6 +11,7 @@ import React, {
 
 type AuthContextType = {
   token: string | null;
+  error: string | null;
   setToken: (val: string | null) => void;
   refreshToken: () => Promise<void>;
 };
@@ -25,27 +26,37 @@ type AuthProviderProps = {
 export function AuthProvider({ children, initialToken }: AuthProviderProps) {
   const [token, setToken] = useState<string | null>(initialToken ?? null);
   const [expiry, setExpiry] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
   const refreshToken = useCallback(async () => {
+    setError(null);
     try {
       const res = await fetch(`${SERVER_URL}/api/auth/refresh-token`, {
         method: "post",
         credentials: "include",
       });
 
-      if (!res.ok) throw new Error("Refresh failed");
-      const data: { accessToken: string; expiresIn: number } = await res.json();
+      const resData = await res.json();
+
+      if (resData.status !== "success") {
+        setError(resData.message || "Refresh failed");
+        return;
+      }
+
+      const data: { accessToken: string; expiresIn: number } = resData.data;
+
       setToken(data.accessToken);
       setExpiry(Date.now() + data.expiresIn * 1000);
-    } catch (err) {
-      console.error("Error refreshing token:", err);
+    } catch (err: any) {
       setToken(null);
       setExpiry(null);
+      setError(err.message || "Error refreshing token");
     }
   }, []);
 
   const value = useMemo(
-    () => ({ token, setToken, refreshToken }),
-    [token, refreshToken]
+    () => ({ token, error, setToken, refreshToken }),
+    [token, error, refreshToken]
   );
 
   useEffect(() => {
