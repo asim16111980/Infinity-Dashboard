@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/authContext";
 import { useEffect, useState } from "react";
 import Icon from "../Icon";
 import clsx from "clsx";
+import { mapErrorToMessage } from "@/utils/mapErrorToMessage";
 
 const LoginForm = () => {
   type serverError = {
@@ -52,15 +53,16 @@ const LoginForm = () => {
         setToken(loginRes.authToken);
         router.push("/");
       } else {
-        setServerError({
-          visible: true,
-          message: "Service unavailable. try again in a few minutes.",
-        });
+        throw new Error(loginRes.message);
+        // setServerError({
+        //   visible: true,
+        //   message: "Service unavailable. try again in a few minutes.",
+        // });
       }
     } catch (err) {
       setServerError({
         visible: true,
-        message: "Network error. Please retry.",
+        message: mapErrorToMessage(err),
       });
     }
   };
@@ -84,17 +86,15 @@ const LoginForm = () => {
 
   return (
     <div className="relative w-full flex flex-col gap-4 py-10">
-      {serverError.visible && (
-        <div
-          className={clsx(
-            "absolute left-0 -top-5 w-full flex justify-center items-center gap-2 mb-3 p-2 bg-red-100 border border-red-300 text-red-700 rounded transition-opacity duration-500 ease-in-out",
-            serverError.visible ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <Icon name="alertCircle" className="size-5 shrink-0" />
-          {serverError.message}
-        </div>
-      )}
+      <div
+        className={clsx(
+          "absolute left-0 -top-6 w-full flex justify-center items-center gap-2 p-3 text-sm text-center break-words bg-red-100 border border-red-300 text-red-700 rounded shadow-sm transition-opacity duration-500 ease-in-out",
+          serverError.visible && !isSubmitted ? "opacity-100" : "opacity-0"
+        )}
+      >
+        <Icon name="alertCircle" className="size-5 shrink-0" />
+        {serverError.message}
+      </div>
       <form
         method="post"
         action=""

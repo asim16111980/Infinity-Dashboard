@@ -1,5 +1,6 @@
 // AuthContext.tsx
 "use client";
+import { mapErrorToMessage } from "@/utils/mapErrorToMessage";
 import React, {
   createContext,
   useContext,
@@ -39,8 +40,9 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
       const resData = await res.json();
 
       if (resData.status !== "success") {
-        setError(resData.message || "Refresh failed");
-        return;
+        throw new Error(resData.message || "Refresh failed")
+        // setError(resData.message || "Refresh failed");
+        // return;
       }
 
       const data: { accessToken: string; expiresIn: number } = resData.data;
@@ -50,7 +52,7 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
     } catch (err: any) {
       setToken(null);
       setExpiry(null);
-      setError(err.message || "Error refreshing token");
+      setError(mapErrorToMessage(err));
     }
   }, []);
 

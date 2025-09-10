@@ -24,7 +24,7 @@ export default function LoginPage() {
           </p>
         </div>
         <div className="w-full flex flex-col items-center gap-4 p-4">
-          <p className="flex flex-col items-center gap-4 text-sm text-slate-500">
+          <p className="flex flex-col items-center gap-4 text-sm text-slate-500 select-none">
             Or sign in using:
           </p>
           <RegularButton
