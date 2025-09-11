@@ -2,7 +2,7 @@
 import RegularButton from "../Button/RegularButton";
 import CheckBox from "../CheckBox";
 import TextInput from "../TextInput";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import { loginForm } from "./loginForm.type";
 import { postData } from "@/app/api/auth/route";
 import { useRouter } from "next/navigation";
@@ -17,12 +17,14 @@ const LoginForm = () => {
     visible: boolean;
     message: string | null;
   };
-  const { setToken, error } = useAuth();
+  const { setToken, authError } = useAuth();
 
   const [serverError, setServerError] = useState<serverError>({
     visible: false,
     message: null,
   });
+  const [errorVisible, setErrorVisible] = useState<boolean>(false);
+
   const router = useRouter();
   const emailPattern =
     /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -34,13 +36,13 @@ const LoginForm = () => {
     formState: { errors, isSubmitted },
     handleSubmit,
     watch,
-  } = useForm<loginForm>();
+  } = useForm<loginForm>({ mode: "onSubmit" });
 
   const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
-    setServerError({
+    setServerError((prev) => ({
+      ...prev,
       visible: false,
-      message: null,
-    });
+    }));
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -59,37 +61,43 @@ const LoginForm = () => {
         //   message: "Service unavailable. try again in a few minutes.",
         // });
       }
-    } catch (err) {
+    } catch (err) { 
       setServerError({
         visible: true,
         message: mapErrorToMessage(err),
       });
     }
   };
-  useEffect(() => {
-    if (error !== null)
-      setServerError({
-        visible: true,
-        message: error,
-      });
-  }, [error]);
+  const onError: SubmitErrorHandler<loginForm> = () => {
+    setErrorVisible(true);
+  };
 
   useEffect(() => {
-    const sub = watch(() =>
+    if (authError !== null)
+      setServerError({
+        visible: true,
+        message: authError,
+      });
+  }, [authError]);
+
+  useEffect(() => {
+    const sub = watch(() => {
+      setErrorVisible(false);
       setServerError((prev) => ({
         ...prev,
-        visible: serverError.message ? true : false,
-      }))
-    );
+        visible: false,
+        // serverError.message ? true : false,
+      }));
+    });
     return () => sub.unsubscribe();
   }, [watch]);
 
   return (
-    <div className="relative w-full flex flex-col gap-4 py-10">
+    <div className="relative w-full flex flex-col gap-4 pt-10">
       <div
         className={clsx(
-          "absolute left-0 -top-6 w-full flex justify-center items-center gap-2 p-3 text-sm text-center break-words bg-red-100 border border-red-300 text-red-700 rounded shadow-sm transition-opacity duration-500 ease-in-out",
-          serverError.visible && !isSubmitted ? "opacity-100" : "opacity-0"
+          "absolute left-0 -top-6 w-full flex justify-center items-center gap-1 p-3 text-sm text-center break-words bg-red-100 border border-red-300 text-red-700 rounded shadow-sm transition-opacity duration-500 ease-in-out",
+          serverError.visible ? "opacity-100" : "opacity-0"
         )}
       >
         <Icon name="alertCircle" className="size-5 shrink-0" />
@@ -98,7 +106,7 @@ const LoginForm = () => {
       <form
         method="post"
         action=""
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit, onError)}
         className="w-full flex flex-col gap-4"
       >
         <TextInput
@@ -109,8 +117,8 @@ const LoginForm = () => {
             pattern: { value: emailPattern, message: "Invalid email address" },
           })}
           aria-invalid={errors.email ? "true" : "false"}
-          error={isSubmitted ? !!errors.email : false}
-          helperText={errors.email?.message}
+          error={errorVisible ? !!errors.email : false}
+          helperText={errorVisible ? errors.email?.message : ""}
         />
         <TextInput
           label="Password"
@@ -130,8 +138,8 @@ const LoginForm = () => {
             },
           })}
           aria-invalid={errors.password ? "true" : "false"}
-          error={isSubmitted ? !!errors.password : false}
-          helperText={errors.password?.message}
+          error={errorVisible ? !!errors.password : false}
+          helperText={errorVisible ? errors.password?.message : ""}
         />
         <CheckBox
           label="Remember me"

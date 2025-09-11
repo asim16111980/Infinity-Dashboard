@@ -15,8 +15,9 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         ? "text"
         : "password"
       : type || "text";
+    
     return (
-      <label className={clsx("flex flex-col gap-1 select-none", className)}>
+      <label className={clsx("h-20 flex flex-col gap-1 select-none", className)}>
         {label && (
           <span className="text-sm text-slate-600 capitalize">{label}</span>
         )}

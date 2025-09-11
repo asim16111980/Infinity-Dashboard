@@ -2,7 +2,7 @@
 
 export function mapErrorToMessage(error: unknown): string {
     if (error instanceof TypeError && error.message.includes("fetch")) {
-      return "Network error. Please check your connection and try again.";
+      return "The service is temporarily unavailable. Please try again later.";
     }
   
     if (typeof error === "object" && error !== null) {

@@ -12,7 +12,7 @@ import React, {
 
 type AuthContextType = {
   token: string | null;
-  error: string | null;
+  authError: string | null;
   setToken: (val: string | null) => void;
   refreshToken: () => Promise<void>;
 };
@@ -27,10 +27,10 @@ type AuthProviderProps = {
 export function AuthProvider({ children, initialToken }: AuthProviderProps) {
   const [token, setToken] = useState<string | null>(initialToken ?? null);
   const [expiry, setExpiry] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const refreshToken = useCallback(async () => {
-    setError(null);
+    setAuthError(null);
     try {
       const res = await fetch(`${SERVER_URL}/api/auth/refresh-token`, {
         method: "post",
@@ -40,9 +40,9 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
       const resData = await res.json();
 
       if (resData.status !== "success") {
+        console.log(resData.message);
+        
         throw new Error(resData.message || "Refresh failed")
-        // setError(resData.message || "Refresh failed");
-        // return;
       }
 
       const data: { accessToken: string; expiresIn: number } = resData.data;
@@ -52,13 +52,13 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
     } catch (err: any) {
       setToken(null);
       setExpiry(null);
-      setError(mapErrorToMessage(err));
+      setAuthError(mapErrorToMessage(err));
     }
   }, []);
 
   const value = useMemo(
-    () => ({ token, error, setToken, refreshToken }),
-    [token, error, refreshToken]
+    () => ({ token, authError, setToken, refreshToken }),
+    [token, authError, refreshToken]
   );
 
   useEffect(() => {
