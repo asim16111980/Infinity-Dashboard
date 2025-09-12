@@ -52,14 +52,10 @@ const LoginForm = () => {
       );
 
       if (loginRes.status === "success") {
-        setToken(loginRes.authToken);
+        setToken(loginRes.data.authToken);
         router.push("/");
       } else {
-        throw new Error(loginRes.message);
-        // setServerError({
-        //   visible: true,
-        //   message: "Service unavailable. try again in a few minutes.",
-        // });
+        throw new Error(loginRes.data.message);
       }
     } catch (err) { 
       setServerError({
@@ -83,11 +79,10 @@ const LoginForm = () => {
   useEffect(() => {
     const sub = watch(() => {
       setErrorVisible(false);
-      setServerError((prev) => ({
-        ...prev,
+      setServerError({
         visible: false,
-        // serverError.message ? true : false,
-      }));
+        message: null,
+      });
     });
     return () => sub.unsubscribe();
   }, [watch]);

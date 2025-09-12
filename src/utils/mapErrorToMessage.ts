@@ -1,31 +1,24 @@
 // utils/mapErrorToMessage.ts
+export function mapErrorToMessage(err: any): string {
+  if (!err) return "An unexpected error occurred. Please try again.";
 
-export function mapErrorToMessage(error: unknown): string {
-    if (error instanceof TypeError && error.message.includes("fetch")) {
-      return "The service is temporarily unavailable. Please try again later.";
-    }
-  
-    if (typeof error === "object" && error !== null) {
-      const err = error as any;
-  
-      if (err.status) {
-        switch (err.status) {
-          case 401:
-          case 403:
-            return "Your session has expired. Please log in again.";
-          case 500:
-          case 503:
-            return "The service is temporarily unavailable. Please try again later.";
-          default:
-            return "Something went wrong. Please try again.";
-        }
-      }
-  
-      if (err.message) {
-        return err.message;
-      }
-    }
-  
-    return "An unexpected error occurred. Please try again.";
+  const msg = err.message || err.toString();
+
+  if (msg.includes("Invalid credentials")) {
+    return "Incorrect email or password.";
   }
-  
+
+  if (msg.includes("Failed to fetch")) {
+    return "Connection failed. Please check your internet and try again.";
+  }
+
+  if (msg.includes("Service unavailable")) {
+    return "Service unavailable. Please try again later.";
+  }
+
+  if (msg.includes("MongoServerSelectionError")) {
+    return "Database connection issue. Please try again later.";
+  }
+
+  return "Something went wrong. Please try again.";
+}

@@ -32,7 +32,7 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
   const refreshToken = useCallback(async () => {
     setAuthError(null);
     try {
-      const res = await fetch(`${SERVER_URL}/api/auth/refresh-token`, {
+      const res = await fetch(`${SERVER_URL}/api/auth/refresh`, {
         method: "post",
         credentials: "include",
       });
@@ -40,9 +40,7 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
       const resData = await res.json();
 
       if (resData.status !== "success") {
-        console.log(resData.message);
-        
-        throw new Error(resData.message || "Refresh failed")
+        return;
       }
 
       const data: { accessToken: string; expiresIn: number } = resData.data;
