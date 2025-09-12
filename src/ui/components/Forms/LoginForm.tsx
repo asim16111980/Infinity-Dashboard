@@ -17,7 +17,7 @@ const LoginForm = () => {
     visible: boolean;
     message: string | null;
   };
-  const { setToken, authError } = useAuth();
+  const {  authError } = useAuth();
 
   const [serverError, setServerError] = useState<serverError>({
     visible: false,
@@ -52,12 +52,11 @@ const LoginForm = () => {
       );
 
       if (loginRes.status === "success") {
-        setToken(loginRes.data.authToken);
         router.push("/");
       } else {
         throw new Error(loginRes.data.message);
       }
-    } catch (err) { 
+    } catch (err) {
       setServerError({
         visible: true,
         message: mapErrorToMessage(err),

@@ -12,12 +12,10 @@ export async function middleware(req: NextRequest) {
         headers: { cookie: cookieHeader },
       }
     );
-    const resData = await res.json();
-  // console.log(resData);
-  
+    
     if (res.ok) {
-   
-      // isAuthenticated = data.status === "success";
+      const resData = await res.json();
+      isAuthenticated = resData.status === "success";
     }
   } catch {
     isAuthenticated = false;

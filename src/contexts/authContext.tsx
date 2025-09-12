@@ -43,9 +43,9 @@ export function AuthProvider({ children, initialToken }: AuthProviderProps) {
         return;
       }
 
-      const data: { accessToken: string; expiresIn: number } = resData.data;
+      const data: { authToken: string; expiresIn: number } = resData.data;
 
-      setToken(data.accessToken);
+      setToken(data.authToken);
       setExpiry(Date.now() + data.expiresIn * 1000);
     } catch (err: any) {
       setToken(null);

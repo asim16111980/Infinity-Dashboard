@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../ui/layout/Header";
-import SidebarNav from "../ui/layout/Sidebar";
+import Sidebar from "../ui/layout/Sidebar";
 import { AuthProvider } from "@/contexts/authContext";
 
 // const geistSans = Geist({
@@ -26,12 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <html lang="en">
-        <body className="min-h-screen flex justify-center items-center bg-slate-100">
-          {children}
-        </body>
-      </html>
-    </AuthProvider>
+    <html lang="en">
+      <body className="min-h-screen flex flex-col items-center bg-slate-100">
+        <AuthProvider>
+          <Header userAvatar="" />
+          <div className="flex-1 w-full h-auto flex">
+            <Sidebar />
+            <main className="flex-1 overflow-auto">
+            {children}
+            </main>
+          </div>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }

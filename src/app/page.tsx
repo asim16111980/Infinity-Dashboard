@@ -4,8 +4,8 @@ import TextInput from "@/ui/components/TextInput";
 
 export default function Home() {
   return (
-    <main className="w-[540px] flex flex-col items-center justify-between gap-8 p-14 bg-white rounded-md shadow">
-      <div className="flex flex-col items-center gap-2">
+    <div className="size-full flex flex-col items-center justify-between gap-8 p-14 bg-white rounded-md shadow">
+      {/* <div className="flex flex-col items-center gap-2">
         <h1 className="text-3xl font-bold text-slate-900">Create an Account</h1>
         <p className="text-base text-slate-500">
           Have an Account?
@@ -60,7 +60,7 @@ export default function Home() {
             className="w-full gap-4 p-2 bg-white text-blue-500 border border-slate-300" iconName="facebook"
           />
         </div>
-      </div>
-    </main>
+      </div> */}
+    </div>
   );
 }

@@ -10,7 +10,7 @@ const Sidebar = () => {
   // console.log(isActive);
 
   return (
-    <aside className="w-64 h-full bg-blue-950 text-white p-4">
+    <aside className="w-64 bg-blue-950 text-white p-4">
       <nav>
         <ul className="flex flex-col">
           {SIDEBAR_LINKS.map((link) => {
