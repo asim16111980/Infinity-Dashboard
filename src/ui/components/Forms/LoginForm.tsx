@@ -54,7 +54,9 @@ const LoginForm = () => {
       if (loginRes.status === "success") {
         router.push("/");
       } else {
-        throw new Error(loginRes.data.message);
+        console.log(loginRes);
+        
+        throw new Error(loginRes);
       }
     } catch (err) {
       setServerError({
@@ -136,7 +138,7 @@ const LoginForm = () => {
           helperText={errorVisible ? errors.password?.message : ""}
         />
         <CheckBox
-          label="Remember me"
+          label="Keep me signed in"
           titleClasses="text-sm text-slate-600"
           {...register("remember")}
         />
@@ -146,7 +148,7 @@ const LoginForm = () => {
           title="Login"
           className="p-2 bg-blue-950 text-white"
         />
-      </form>{" "}
+      </form>
     </div>
   );
 };

@@ -5,6 +5,7 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   const isAuthPage = url.pathname.startsWith("/login");
+  const isPasswordResetPage = url.pathname.startsWith("/reset-password");
   const isServerErrorPage = url.pathname.startsWith("/server-error");
 
   let serverDown = false;
@@ -26,13 +27,22 @@ export async function middleware(req: NextRequest) {
     serverDown = true;
   }
 
-  if (serverDown && !isServerErrorPage) {
-    return NextResponse.redirect(new URL("/server-error", url));
+  if (serverDown) {
+    if (!isServerErrorPage) {
+      return NextResponse.redirect(new URL("/server-error", url));
+    }
+    return NextResponse.next();
   }
 
-  if (!isAuthenticated && !isAuthPage) {
+  if (!isAuthenticated) {
+    
+    console.log(isAuthPage,isPasswordResetPage);
+    if (!isAuthPage) {
+      console.log(isAuthPage,isPasswordResetPage);
     return NextResponse.redirect(new URL("/login", url));
   }
+  return NextResponse.next();
+}
 
   if (isAuthenticated && isAuthPage) {
     return NextResponse.redirect(new URL("/", url));
