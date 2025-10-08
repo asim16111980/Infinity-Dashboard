@@ -17,7 +17,7 @@ const LoginForm = () => {
     visible: boolean;
     message: string | null;
   };
-  const {  authError } = useAuth();
+  const { authError } = useAuth();
 
   const [serverError, setServerError] = useState<serverError>({
     visible: false,
@@ -36,7 +36,7 @@ const LoginForm = () => {
     formState: { errors, isSubmitted },
     handleSubmit,
     watch,
-  } = useForm<loginForm>({ mode: "onSubmit" });
+  } = useForm<loginForm>();
 
   const onSubmit: SubmitHandler<loginForm> = async (loginData) => {
     setServerError((prev) => ({
@@ -55,13 +55,13 @@ const LoginForm = () => {
         router.push("/");
       } else {
         console.log(loginRes);
-        
+
         throw new Error(loginRes);
       }
     } catch (err) {
       setServerError({
         visible: true,
-        message: mapErrorToMessage(err),
+        message: await mapErrorToMessage(err),
       });
     }
   };

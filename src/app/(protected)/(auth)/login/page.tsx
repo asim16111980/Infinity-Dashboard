@@ -17,7 +17,7 @@ export default function LoginPage() {
           <p className="flex flex-col items-center gap-4 text-sm">
             <CustomLink
               variant="custom"
-              href="/password-reset"
+              href="/reset-password"
               title="Forgot your password?"
               className="text-blue-600"
             />

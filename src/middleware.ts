@@ -31,21 +31,16 @@ export async function middleware(req: NextRequest) {
     if (!isServerErrorPage) {
       return NextResponse.redirect(new URL("/server-error", url));
     }
-    return NextResponse.next();
-  }
-
-  if (!isAuthenticated) {
-    
-    console.log(isAuthPage,isPasswordResetPage);
-    if (!isAuthPage) {
-      console.log(isAuthPage,isPasswordResetPage);
-    return NextResponse.redirect(new URL("/login", url));
-  }
-  return NextResponse.next();
-}
-
-  if (isAuthenticated && isAuthPage) {
-    return NextResponse.redirect(new URL("/", url));
+  } else {
+    if (isAuthenticated) {
+      if (isAuthPage) {
+        return NextResponse.redirect(new URL("/", url));
+      }
+    } else {
+      if (!isAuthPage && !isPasswordResetPage) {
+        return NextResponse.redirect(new URL("/login", url));
+      }
+    }
   }
 
   return NextResponse.next();
